@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>UN Global Goals - Ray Tian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Ray Tian's Portfolio - UN Global Goals">
+    <meta name="description" content="Ray Tian's focus on UN Global Goal 13: Climate Action">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 80px;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: center;
+            flex: 1;
+            min-width: 450px;
+            max-width: 900px;
+        }
+        .nav-menu li {
+            margin: 0 6px;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0.2px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                min-width: 400px;
+            }
+            .nav-menu li {
+                margin: 0 4px;
+            }
+            .nav-menu a {
+                padding: 5px 3px;
+                font-size: 0.8rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                min-width: 350px;
+            }
+            .nav-menu li {
+                margin: 0 3px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.75rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+                min-width: 100px;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                min-width: 300px;
+            }
+            .nav-menu li {
+                margin: 0 2px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.7rem;
+            }
+            .logo {
+                font-size: 1.1rem;
+                min-width: 90px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+            }
+            #mobile-nav-toggle {
+                display: block;
+            }
+            body {
+                padding-top: 60px;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+        .content img {
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .content img:hover {
+            transform: translateY(-5px);
+        }
+        .content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .content h3 {
+            color: #1E90FF;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        .content p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #1E90FF;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #187bcd;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 树木交互样式 */
+        .tree-interaction {
+            position: relative;
+            height: 400px;
+            margin: 40px 0;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .tree-container {
+            position: absolute;
+            right: 50px;
+            bottom: 50px;
+            width: 200px;
+            height: 300px;
+        }
+        .tree {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: all 0.5s ease;
+        }
+        .water-bottle {
+            position: absolute;
+            left: 50px;
+            bottom: 50px;
+            width: 80px;
+            height: 120px;
+            cursor: move;
+            transition: transform 0.3s ease;
+        }
+        .water-bottle:hover {
+            transform: scale(1.1);
+        }
+        .water-bottle.dragging {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+        .success-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(46, 204, 113, 0.9);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        .success-message.show {
+            opacity: 1;
+        }
+
+        /* 深色模式适配 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a1a;
+                color: #ffffff;
+            }
+            .content {
+                background: #2d2d2d;
+            }
+            .content h2 {
+                color: #87CEFA;
+            }
+            .content h3 {
+                color: #87CEFA;
+            }
+            .content p {
+                color: #e0e0e0;
+            }
+            .btn {
+                background: #1E90FF;
+                color: white;
+            }
+            .btn:hover {
+                background: #187bcd;
+                color: white;
+            }
+            .tree-interaction {
+                background: rgba(45, 45, 45, 0.8);
+            }
+            .success-message {
+                background: rgba(46, 204, 113, 0.9);
+                color: white;
+            }
+        }
+
+        /* 浅色模式适配 */
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #f5f5f5;
+                color: #333333;
+            }
+            .content {
+                background: #ffffff;
+            }
+            .content h2 {
+                color: #2c3e50;
+            }
+            .content h3 {
+                color: #1E90FF;
+            }
+            .content p {
+                color: #555;
+            }
+            .btn {
+                background: #1E90FF;
+                color: white;
+            }
+            .btn:hover {
+                background: #187bcd;
+                color: white;
+            }
+            .tree-interaction {
+                background: rgba(255, 255, 255, 0.8);
+            }
+            .success-message {
+                background: rgba(46, 204, 113, 0.9);
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Start -->
+    <header class="top-header" id="top-header">
+        <div class="container text-center">
+            <img src="img/profile-pic.jpg" alt="Ray Tian's profile picture" class="profile-img">
+            <h1>Ray Tian</h1>
+            <p>Web Developer | Programmer | Content Creator</p>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Nav Start -->
+    <nav class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </nav>
+    <!-- Nav End -->
+
+    <!-- Content Start -->
+    <section class="content decorated-section">
+        <div class="container">
+            <h2>UN Global Goal: Climate Action</h2>
+            <p>Supporting Sustainable Development Goal 13.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="img/climate-change.jpg" class="img-fluid" alt="Illustration of climate action initiatives">
+                </div>
+                <div class="col-md-6">
+                    <h3>Goal 13: Climate Action</h3>
+                    <p>Every person, in every country in every continent will be impacted in some shape or form by climate change. There is a climate cataclysm looming, and we are underprepared for what this could mean.
+
+                        Climate change is caused by human activities and threatens life on earth as we know it. With rising greenhouse gas emissions, climate change is occurring at rates much faster than anticipated. Its impacts can be devastating and include extreme and changing weather patterns and rising sea levels.
+                        
+                    </p>
+                    <a href="https://www.un.org/sustainabledevelopment/climate-action/" target="_blank" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <!-- little game of tree -->
+            <div class="tree-interaction">
+                <img src="img/dry-tree.png" alt="dry tree" class="tree" id="tree">
+                <img src="img/water-bottle.png" alt="water bottle" class="water-bottle" id="waterBottle" draggable="true">
+                <div class="success-message" id="successMessage">
+                    Protect the environment！
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- 树木交互脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const waterBottle = document.getElementById('waterBottle');
+            const tree = document.getElementById('tree');
+            const successMessage = document.getElementById('successMessage');
+            let isDragging = false;
+            let hasTransformed = false;
+
+            // 拖拽开始
+            waterBottle.addEventListener('dragstart', function(e) {
+                isDragging = true;
+                waterBottle.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', ''); // 必须设置数据才能拖拽
+            });
+
+            // 拖拽结束
+            waterBottle.addEventListener('dragend', function() {
+                isDragging = false;
+                waterBottle.classList.remove('dragging');
+            });
+
+            // 拖拽经过树木
+            tree.addEventListener('dragover', function(e) {
+                e.preventDefault(); // 允许放置
+            });
+
+            // 放置水瓶
+            tree.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (!hasTransformed) {
+                    // 改变树木图片
+                    tree.src = 'img/green-tree.png';
+                    tree.alt = '重获新生的树木';
+                    
+                    // 隐藏水瓶
+                    waterBottle.style.opacity = '0';
+                    
+                    // 显示成功消息
+                    successMessage.classList.add('show');
+                    
+                    // 3秒后隐藏消息
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                    
+                    hasTransformed = true;
+                }
+            });
+        });
+    </script>
+
+    <!-- 音乐播放器（隐藏） -->
+    <audio id="bg-music" src="audio/Break.mp3" loop style="display:none"></audio>
+    <!-- 波浪条 -->
+    <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</body>
+</html>

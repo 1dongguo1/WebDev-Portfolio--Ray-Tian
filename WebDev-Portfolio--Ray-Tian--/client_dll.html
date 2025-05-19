@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>client_dll.hpp - Ray Tian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Ray Tian's Portfolio - client_dll.hpp">
+    <meta name="description" content="Source code for client_dll.hpp">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 80px;
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: center;
+            flex: 1;
+            min-width: 450px;
+            max-width: 900px;
+        }
+        .nav-menu li {
+            margin: 0 6px;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0.2px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        .content {
+            background: #2d2d2d;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            padding: 30px;
+            max-width: 1200px;
+        }
+        .content h2 {
+            color: #87CEFA;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #87CEFA;
+            padding-bottom: 10px;
+        }
+        pre {
+            max-height: 70vh;
+            overflow: auto;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        /* 代码高亮颜色 */
+        .keyword { color: #569cd6; }  /* 关键字 */
+        .string { color: #ce9178; }   /* 字符串 */
+        .comment { color: #6a9955; }  /* 注释 */
+        .number { color: #b5cea8; }   /* 数字 */
+        .type { color: #4ec9b0; }     /* 类型 */
+        .function { color: #dcdcaa; } /* 函数 */
+        .namespace { color: #4ec9b0; } /* 命名空间 */
+        .enum { color: #4ec9b0; }     /* 枚举 */
+        .macro { color: #c586c0; }    /* 宏 */
+        .operator { color: #d4d4d4; } /* 运算符 */
+        .punctuation { color: #d4d4d4; } /* 标点符号 */
+        .btn-details {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1E90FF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-details:hover {
+            background: #187bcd;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .btn-details i {
+            margin-right: 5px;
+        }
+        .footer {
+            background: #1E90FF;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                min-width: 400px;
+            }
+            .nav-menu li {
+                margin: 0 4px;
+            }
+            .nav-menu a {
+                padding: 5px 3px;
+                font-size: 0.8rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                min-width: 350px;
+            }
+            .nav-menu li {
+                margin: 0 3px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.75rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+                min-width: 100px;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                min-width: 300px;
+            }
+            .nav-menu li {
+                margin: 0 2px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.7rem;
+            }
+            .logo {
+                font-size: 1.1rem;
+                min-width: 90px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+            }
+            #mobile-nav-toggle {
+                display: block;
+            }
+            body {
+                padding-top: 60px;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+        /* 深色模式适配 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1e1e1e;
+                color: #e0e0e0;
+            }
+            .header {
+                background: rgba(45, 45, 45, 0.95);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+             .header.scrolled {
+                background: rgba(30, 30, 30, 0.98);
+            }
+            .logo a {
+                color: #e0e0e0;
+            }
+            .logo a:hover {
+                color: #87CEFA;
+            }
+            .nav-menu a {
+                color: #e0e0e0;
+            }
+            .nav-menu a:hover {
+                color: #87CEFA;
+            }
+            .social-nav a {
+                color: #e0e0e0;
+            }
+            .social-nav a:hover {
+                color: #87CEFA;
+            }
+            .content {
+                background: #2d2d2d;
+                color: #e0e0e0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+            .content h2 {
+                color: #87CEFA;
+                border-bottom-color: #87CEFA;
+            }
+             .content p strong {
+                color: #b5cea8;
+            }
+            pre {
+                background: #1e1e1e;
+                color: #d4d4d4;
+            }
+             .btn-details {
+                background: #1E90FF;
+                color: #fff;
+            }
+            .btn-details:hover {
+                background: #187bcd;
+                color: #fff;
+            }
+             .footer {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+        }
+
+        /* 浅色模式适配 */
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #f5f5f5;
+                color: #333333;
+            }
+            .content {
+                background: #ffffff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            pre {
+                background: #f8f8f8;
+                color: #333333;
+                border: 1px solid #e0e0e0;
+            }
+            .content h2 {
+                color: #1E90FF;
+                border-bottom-color: #1E90FF;
+            }
+            .btn-details {
+                background: #1E90FF;
+                color: #fff;
+            }
+            .btn-details:hover {
+                background: #187bcd;
+                color: #fff;
+            }
+        }
+
+        /* 代码高亮颜色 - 深色模式 */
+        @media (prefers-color-scheme: dark) {
+            .keyword { color: #569cd6; }  /* 关键字 */
+            .string { color: #ce9178; }   /* 字符串 */
+            .comment { color: #6a9955; }  /* 注释 */
+            .number { color: #b5cea8; }   /* 数字 */
+            .type { color: #4ec9b0; }     /* 类型 */
+            .function { color: #dcdcaa; } /* 函数 */
+            .namespace { color: #4ec9b0; } /* 命名空间 */
+            .enum { color: #4ec9b0; }     /* 枚举 */
+            .macro { color: #c586c0; }    /* 宏 */
+            .operator { color: #d4d4d4; } /* 运算符 */
+            .punctuation { color: #d4d4d4; } /* 标点符号 */
+        }
+
+        /* 代码高亮颜色 - 浅色模式 */
+        @media (prefers-color-scheme: light) {
+            .keyword { color: #0000ff; }  /* 关键字 */
+            .string { color: #a31515; }   /* 字符串 */
+            .comment { color: #008000; }  /* 注释 */
+            .number { color: #098658; }   /* 数字 */
+            .type { color: #267f99; }     /* 类型 */
+            .function { color: #795e26; } /* 函数 */
+            .namespace { color: #267f99; } /* 命名空间 */
+            .enum { color: #267f99; }     /* 枚举 */
+            .macro { color: #af00db; }    /* 宏 */
+            .operator { color: #000000; } /* 运算符 */
+            .punctuation { color: #000000; } /* 标点符号 */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Start -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Start -->
+    <section class="content">
+        <div class="container">
+            <h2>client_dll.hpp</h2>
+            <div class="mb-4">
+                <p class="mb-2"><strong>Note:</strong> This file contains the class definitions and enums required for the cheat logic. These definitions may change over time and should be updated regularly when the game updates.</p>
+                <a href="client_dll.hpp" download class="btn btn-details">
+                    <i class="fa fa-download"></i> Download client_dll.hpp
+                </a>
+            </div>
+            <pre><code>//I'm using a2x's tool to dump the code of cs2
+// Generated using https://github.com/a2x/cs2-dumper
+
+#pragma once
+
+#include <cstddef>
+
+namespace cs2_dumper {
+    namespace schemas {
+        // Module: client.dll
+        // Class count: 415
+        // Enum count: 7
+        namespace client_dll {
+            // Alignment: 4
+            // Member count: 15
+            enum class CompositeMaterialInputLooseVariableType_t : uint32_t {
+                LOOSE_VARIABLE_TYPE_BOOLEAN = 0x0,
+                LOOSE_VARIABLE_TYPE_INTEGER1 = 0x1,
+                LOOSE_VARIABLE_TYPE_INTEGER2 = 0x2,
+                LOOSE_VARIABLE_TYPE_INTEGER3 = 0x3,
+                LOOSE_VARIABLE_TYPE_INTEGER4 = 0x4,
+                LOOSE_VARIABLE_TYPE_FLOAT1 = 0x5,
+                LOOSE_VARIABLE_TYPE_FLOAT2 = 0x6,
+                LOOSE_VARIABLE_TYPE_FLOAT3 = 0x7,
+                LOOSE_VARIABLE_TYPE_FLOAT4 = 0x8,
+                LOOSE_VARIABLE_TYPE_COLOR4 = 0x9,
+                LOOSE_VARIABLE_TYPE_STRING = 0xA,
+                LOOSE_VARIABLE_TYPE_SYSTEMVAR = 0xB,
+                LOOSE_VARIABLE_TYPE_RESOURCE_MATERIAL = 0xC,
+                LOOSE_VARIABLE_TYPE_RESOURCE_TEXTURE = 0xD,
+                LOOSE_VARIABLE_TYPE_PANORAMA_RENDER = 0xE
+            };
+
+            // Alignment: 4
+            // Member count: 7
+            enum class CompositeMaterialInputTextureType_t : uint32_t {
+                INPUT_TEXTURE_TYPE_DEFAULT = 0x0,
+                INPUT_TEXTURE_TYPE_NORMALMAP = 0x1,
+                INPUT_TEXTURE_TYPE_COLOR = 0x2,
+                INPUT_TEXTURE_TYPE_MASKS = 0x3,
+                INPUT_TEXTURE_TYPE_ROUGHNESS = 0x4,
+                INPUT_TEXTURE_TYPE_PEARLESCENCE_MASK = 0x5,
+                INPUT_TEXTURE_TYPE_AO = 0x6
+            };
+
+            // Alignment: 4
+            // Member count: 6
+            enum class CompositeMaterialInputContainerSourceType_t : uint32_t {
+                CONTAINER_SOURCE_TYPE_TARGET_MATERIAL = 0x0,
+                CONTAINER_SOURCE_TYPE_MATERIAL_FROM_TARGET_ATTR = 0x1,
+                CONTAINER_SOURCE_TYPE_SPECIFIC_MATERIAL = 0x2,
+                CONTAINER_SOURCE_TYPE_LOOSE_VARIABLES = 0x3,
+                CONTAINER_SOURCE_TYPE_VARIABLE_FROM_TARGET_ATTR = 0x4,
+                CONTAINER_SOURCE_TYPE_TARGET_INSTANCE_MATERIAL = 0x5
+            };
+
+            // Alignment: 4
+            // Member count: 10
+            enum class CompMatPropertyMutatorType_t : uint32_t {
+                COMP_MAT_PROPERTY_MUTATOR_INIT = 0x0,
+                COMP_MAT_PROPERTY_MUTATOR_COPY_MATCHING_KEYS = 0x1,
+                COMP_MAT_PROPERTY_MUTATOR_COPY_KEYS_WITH_SUFFIX = 0x2,
+                COMP_MAT_PROPERTY_MUTATOR_COPY_PROPERTY = 0x3,
+                COMP_MAT_PROPERTY_MUTATOR_SET_VALUE = 0x4,
+                COMP_MAT_PROPERTY_MUTATOR_GENERATE_TEXTURE = 0x5,
+                COMP_MAT_PROPERTY_MUTATOR_CONDITIONAL_MUTATORS = 0x6,
+                COMP_MAT_PROPERTY_MUTATOR_POP_INPUT_QUEUE = 0x7,
+                COMP_MAT_PROPERTY_MUTATOR_DRAW_TEXT = 0x8,
+                COMP_MAT_PROPERTY_MUTATOR_RANDOM_ROLL_INPUT_VARIABLES = 0x9
+            };
+
+            // Alignment: 4
+            // Member count: 2
+            enum class CompositeMaterialVarSystemVar_t : uint32_t {
+                COMPMATSYSVAR_COMPOSITETIME = 0x0,
+                COMPMATSYSVAR_EMPTY_RESOURCE_SPACER = 0x1
+            };
+
+            // Alignment: 4
+            // Member count: 6
+            enum class CompositeMaterialMatchFilterType_t : uint32_t {
+                MATCH_FILTER_MATERIAL_ATTRIBUTE_EXISTS = 0x0,
+                MATCH_FILTER_MATERIAL_SHADER = 0x1,
+                MATCH_FILTER_MATERIAL_NAME_SUBSTR = 0x2,
+                MATCH_FILTER_MATERIAL_ATTRIBUTE_EQUALS = 0x3,
+                MATCH_FILTER_MATERIAL_PROPERTY_EXISTS = 0x4,
+                MATCH_FILTER_MATERIAL_PROPERTY_EQUALS = 0x5
+            };
+
+            // Alignment: 4
+            // Member count: 3
+            enum class CompMatPropertyMutatorConditionType_t : uint32_t {
+                COMP_MAT_MUTATOR_CONDITION_INPUT_CONTAINER_EXISTS = 0x0,
+                COMP_MAT_MUTATOR_CONDITION_INPUT_CONTAINER_VALUE_EXISTS = 0x1,
+                COMP_MAT_MUTATOR_CONDITION_INPUT_CONTAINER_VALUE_EQUALS = 0x2
+            };
+
+            // ... 其他所有命名空间和类的定义 ...
+        }
+    }
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // 导航栏滚动效果
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.header').addClass('scrolled');
+            } else {
+                $('.header').removeClass('scrolled');
+            }
+        });
+    </script>
+
+    <!-- 音乐播放器（隐藏） -->
+    <audio id="bg-music" src="audio/Break.mp3" loop style="display:none"></audio>
+    <!-- 波浪条 -->
+    <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</body>
+</html> 

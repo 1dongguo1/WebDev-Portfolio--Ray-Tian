@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CS2 Internal Cheat Project - Ray Tian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Ray Tian's Portfolio - CS2 Cheat Project">
+    <meta name="description" content="Source code for CS2 Internal Cheat Project">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 80px;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: center;
+            flex: 1;
+            min-width: 450px;
+            max-width: 900px;
+        }
+        .nav-menu li {
+            margin: 0 6px;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0.2px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                min-width: 400px;
+            }
+            .nav-menu li {
+                margin: 0 4px;
+            }
+            .nav-menu a {
+                padding: 5px 3px;
+                font-size: 0.8rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                min-width: 350px;
+            }
+            .nav-menu li {
+                margin: 0 3px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.75rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+                min-width: 100px;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                min-width: 300px;
+            }
+            .nav-menu li {
+                margin: 0 2px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.7rem;
+            }
+            .logo {
+                font-size: 1.1rem;
+                min-width: 90px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+            }
+            #mobile-nav-toggle {
+                display: block;
+            }
+            body {
+                padding-top: 60px;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+
+        /* 深色模式适配 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1e1e1e;
+                color: #e0e0e0;
+            }
+             .top-header {
+                background: #1a1a1a;
+            }
+            .header {
+                background: rgba(45, 45, 45, 0.95);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+             .header.scrolled {
+                background: rgba(30, 30, 30, 0.98);
+            }
+            .logo a {
+                color: #e0e0e0;
+            }
+            .logo a:hover {
+                color: #87CEFA;
+            }
+            .nav-menu a {
+                color: #e0e0e0;
+            }
+            .nav-menu a:hover {
+                color: #87CEFA;
+            }
+            .social-nav a {
+                color: #e0e0e0;
+            }
+            .social-nav a:hover {
+                color: #87CEFA;
+            }
+            .content {
+                background: #2d2d2d;
+                color: #e0e0e0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+            .content h2 {
+                color: #87CEFA;
+                border-bottom-color: #87CEFA;
+            }
+             .content h3 {
+                color: #87CEFA;
+            }
+             .content p {
+                color: #e0e0e0;
+            }
+             .content p strong {
+                color: #b5cea8;
+            }
+            pre {
+                background: #1e1e1e;
+                color: #d4d4d4;
+            }
+             .btn-details {
+                background: #1E90FF;
+                color: #fff;
+            }
+            .btn-details:hover {
+                background: #187bcd;
+                color: #fff;
+            }
+             .footer {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+        }
+
+        /* 浅色模式适配 */
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #f5f5f5;
+                color: #333333;
+            }
+            .content {
+                background: #ffffff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            pre {
+                background: #f8f8f8;
+                color: #333333;
+                border: 1px solid #e0e0e0;
+            }
+            .content h2 {
+                color: #2c3e50;
+            }
+            .content h3 {
+                color: #1E90FF;
+            }
+            .content p {
+                color: #555;
+            }
+            .btn-details {
+                background: #1E90FF;
+                color: #fff;
+            }
+            .btn-details:hover {
+                background: #187bcd;
+                color: #fff;
+            }
+        }
+
+        /* 代码高亮颜色 - 深色模式 */
+        @media (prefers-color-scheme: dark) {
+            .keyword { color: #569cd6; }  /* 关键字 */
+            .string { color: #ce9178; }   /* 字符串 */
+            .comment { color: #6a9955; }  /* 注释 */
+            .number { color: #b5cea8; }   /* 数字 */
+            .type { color: #4ec9b0; }     /* 类型 */
+            .function { color: #dcdcaa; } /* 函数 */
+            .namespace { color: #4ec9b0; } /* 命名空间 */
+            .enum { color: #4ec9b0; }     /* 枚举 */
+            .macro { color: #c586c0; }    /* 宏 */
+            .operator { color: #d4d4d4; } /* 运算符 */
+            .punctuation { color: #d4d4d4; } /* 标点符号 */
+        }
+
+        /* 代码高亮颜色 - 浅色模式 */
+        @media (prefers-color-scheme: light) {
+            .keyword { color: #0000ff; }  /* 关键字 */
+            .string { color: #a31515; }   /* 字符串 */
+            .comment { color: #008000; }  /* 注释 */
+            .number { color: #098658; }   /* 数字 */
+            .type { color: #267f99; }     /* 类型 */
+            .function { color: #795e26; } /* 函数 */
+            .namespace { color: #267f99; } /* 命名空间 */
+            .enum { color: #267f99; }     /* 枚举 */
+            .macro { color: #af00db; }    /* 宏 */
+            .operator { color: #000000; } /* 运算符 */
+            .punctuation { color: #000000; } /* 标点符号 */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Start -->
+    <header class="top-header" id="top-header">
+        <div class="container text-center">
+            <img src="img/profile-pic.jpg" alt="Ray Tian 的个人照片，展示专业形象" class="profile-img">
+            <h1>Ray Tian</h1>
+            <p>Web Developer | Programmer | Content Creator</p>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Nav Start -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+    <!-- Nav End -->
+
+    <!-- Content Start -->
+    <section class="content decorated-section">
+        <div class="container">
+            <h2>CS2 Internal Cheat Project</h2>
+            <div class="mb-4">
+                <p class="mb-2"><strong>Note:</strong> The following files contain the memory offsets required for the cheat logic. Offsets may change over time and should be updated regularly when the game updates. </p>
+                <a class="btn btn-details mr-2" href="client_dll.html" target="_blank">View client_dll.hpp</a>
+                <a class="btn btn-details" href="offsets.html" target="_blank">View offsets.hpp</a>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>ESP Source Code</h3>
+                    <pre><code>
+#include "ESP.h"
+
+void ESP::DrawHealth(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool Horizontal)
+{
+    ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+    float Proportion = CurrentHealth / MaxHealth;
+    ImColor FirstStageColor = ImColor(96, 246, 113, 220);
+    ImColor SecondStageColor = ImColor(247, 214, 103, 220);
+    ImColor ThirdStageColor = ImColor(255, 95, 95, 220);
+    ImColor BackGroundColor = ImColor(90, 90, 90, 220);
+    ImColor Color;
+    if (Proportion > 0.5)
+        Color = FirstStageColor;
+    else if (Proportion > 0.25)
+        Color = SecondStageColor;
+    else
+        Color = ThirdStageColor;
+    DrawList->AddRectFilled(Pos, { Pos.x + Size.x, Pos.y + Size.y }, BackGroundColor);
+    if (Horizontal)
+        DrawList->AddRectFilled(Pos, { Pos.x + Size.x * Proportion, Pos.y + Size.y }, Color);
+    else {
+        float healthHeight = Size.y * Proportion;
+        DrawList->AddRectFilled({ Pos.x, Pos.y + Size.y - healthHeight }, { Pos.x + Size.x, Pos.y + Size.y }, Color);
+    }
+    ImColor BorderColor = ImColor(45, 45, 45, 220);
+    DrawList->AddRect(Pos, { Pos.x + Size.x, Pos.y + Size.y }, BorderColor);
+}
+
+bool ESP::Start() 
+{
+    Player LocalPlayer{};
+    LocalPlayer.control = Address::GetLocalPlayerControl();
+    if (!LocalPlayer.control) 
+        return false;
+    LocalPlayer.pawn = Get::PlayerPawnAddress(LocalPlayer.control);
+    if (!LocalPlayer.pawn) 
+        return false;
+    LocalPlayer.team = Get::PlayerTeam(LocalPlayer.pawn);
+    for (int i{ 0 }; i < 64; ++i)
+    {
+        Vector4 Draw {};
+        int distance = 0;
+        Player Entity{};
+        Entity.control = Address::GetEntityBase(i);
+        if (!Entity.control) 
+            continue;
+        if(!Get::PawnAlive(Entity.control))
+            continue;
+        Entity.pawn = Get::PlayerPawnAddress(Entity.control);
+        if (!Entity.pawn)
+            continue;
+        Entity.team = Get::PlayerTeam(Entity.pawn);
+        Entity.health = Get::PlayerHealth(Entity.pawn);
+        if(Get::IsDormant(Entity.pawn))
+            continue;
+        if (Menu::TeamCheck && Entity.team == LocalPlayer.team)
+            continue;
+        if (Entity.team != 2 && Entity.team != 3)
+            continue;
+        if (!Get::PlayerAlive(Entity.pawn))
+            continue;
+        Entity.name = Get::PlayerName(Entity.control);
+        Entity.pos = Get::PlayerPos(Entity.pawn);
+        const float  w  { ImGui::GetIO().DisplaySize.x };
+        const float  h  { ImGui::GetIO().DisplaySize.y };
+        Vector3 currBotPos = Get::BonePos(Entity.pawn, BoneIndex::ankle_L) ;
+        Vector3 currTopPos = Get::BonePos(Entity.pawn, BoneIndex::head) ;
+        Vector3 curr2DBot{};
+        Vector3 curr2DTop{};
+        if (!Utils::WorldToScreen(currBotPos, curr2DBot, Address::GetViewMatrixPtr(), w, h))
+            continue;
+        if (!Utils::WorldToScreen(currTopPos, curr2DTop, Address::GetViewMatrixPtr(), w, h))
+            continue;
+        const float height{ ::abs(curr2DTop.y - curr2DBot.y) * 1.25f };
+        const float width{ height / 2.f };
+        const float x = curr2DTop.x - (width / 2.f);
+        const float y = curr2DTop.y - (width / 2.5f);
+        if(Menu::Misc::Rander)
+            Set::RadarHack(Entity.pawn);
+        if(Menu::ESP::Glow)
+            Set::GlowHack(Entity.pawn);
+        if (Menu::ESP::Box) 
+        {
+            if(Menu::ESP::BoxType == 0)
+                ImGui::GetBackgroundDrawList()->AddRect(ImVec2(x, y), ImVec2(x + width, y + height), Menu::Color::BoxColor, 3);
+            else
+                ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(x, y), ImVec2(x + width, y + height), Menu::Color::FilledColor, 3);
+        }
+        if (Menu::ESP::Line)
+        {
+            if (Menu::ESP::LineType == 0)
+                ImGui::GetBackgroundDrawList()->AddLine(ImVec2(w / 2, h), ImVec2(x + height / 2, y + height), Menu::Color::LineColor);
+            else
+                ImGui::GetBackgroundDrawList()->AddLine(ImVec2(w / 2, 0), ImVec2(x + height / 2, y), Menu::Color::LineColor);
+        }
+        if (Menu::ESP::Health)
+        {
+            ImVec2 healthBarPos = ImVec2(x - 10, y); // Adjust position as needed
+            ImVec2 healthBarSize = ImVec2(5, height); // Adjust size as needed
+            DrawHealth(100.0f, static_cast<float>(Entity.health), healthBarPos, healthBarSize, false);
+        }
+        if (Menu::ESP::Name)
+        {
+            ImGui::PushFont(chinesefont);
+            ImGui::GetBackgroundDrawList()->AddText(ImVec2(x, y - 10), Menu::Color::NameColor, Entity.name.c_str());
+            ImGui::PopFont();
+        }
+        if (Menu::ESP::AimCricle) 
+        {
+            if (Menu::ESP::CricleType == 0) 
+            {
+                currBotPos = Get::BonePos(Entity.pawn, Menu::Aimbot::AimPos);
+                if (!Utils::WorldToScreen(currBotPos, curr2DBot, Address::GetViewMatrixPtr(), w, h))
+                    continue;
+                ImGui::GetBackgroundDrawList()->AddCircle(ImVec2(curr2DBot.x, curr2DBot.y), Menu::Aimbot::AimSize, Menu::Color::AimCricleColor, 0, 1.5);
+            }
+            else
+            {
+                ImGui::GetBackgroundDrawList()->AddCircle(ImVec2(w / 2, h / 2), Menu::Aimbot::AimSize, Menu::Color::AimCricleColor, 0, 1.5);
+            }
+        }
+        if (Menu::ESP::Bone) 
+        {
+            Bone::Start(Entity.pawn, Menu::Color::BoneColor);
+        }
+        if (Menu::ESP::HeadCricle)
+        {
+            Bone::HeadCricle(Entity.pawn, Menu::Color::HeadCricleColor);
+        }
+    }
+    return true;
+}
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <!-- 删除 superfish、sticky 相关依赖 -->
+    <script src="js/main.js"></script>
+
+    <!-- 音乐播放器（隐藏） -->
+    <audio id="bg-music" src="audio/Break.mp3" loop style="display:none"></audio>
+    <!-- 波浪条 -->
+    <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
+</body>
+</html>

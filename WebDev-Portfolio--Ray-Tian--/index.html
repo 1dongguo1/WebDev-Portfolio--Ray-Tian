@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ray Tian - Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Ray Tian's Portfolio">
+    <meta name="description" content="Ray Tian's Portfolio - Web Developer, Programmer, Content Creator">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: center;
+            flex: 1;
+            min-width: 450px;
+            max-width: 900px;
+        }
+        .nav-menu li {
+            margin: 0 6px;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0.2px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        body {
+            padding-top: 80px;
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                min-width: 400px;
+            }
+            .nav-menu li {
+                margin: 0 4px;
+            }
+            .nav-menu a {
+                padding: 5px 3px;
+                font-size: 0.8rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                min-width: 350px;
+            }
+            .nav-menu li {
+                margin: 0 3px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.75rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+                min-width: 100px;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                min-width: 300px;
+            }
+            .nav-menu li {
+                margin: 0 2px;
+            }
+            .nav-menu a {
+                padding: 5px 2px;
+                font-size: 0.7rem;
+            }
+            .logo {
+                font-size: 1.1rem;
+                min-width: 90px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+            }
+            #mobile-nav-toggle {
+                display: block;
+            }
+            body {
+                padding-top: 60px;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加音频元素 -->
+    <audio id="bg-music" style="display: none;"></audio>
+    
+    <!-- 添加音频可视化器容器 -->
+    <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
+
+    <!-- Header Start -->
+    <header class="top-header" id="top-header">
+        <div class="container text-center">
+            <img src="img/profile-pic.jpg" alt="Ray Tian's profile picture" class="profile-img">
+            <h1>Ray Tian</h1>
+            <p>Web Developer | Programmer | Content Creator</p>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Nav Start -->
+    <nav class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="#top-header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </nav>
+    <!-- Nav End -->
+
+    <!-- About Start -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="img/about-us.jpg" class="img-fluid" alt="Ray Tian's photo">
+                </div>
+                <div class="col-md-8">
+                    <h3>Ray Tian</h3>
+                    <h4>Web Developer & Content Creator</h4>
+                    <p>I'm Ray Tian, I like learning codes and html. I also sharing game reverse tutorials on Bilibili.</p>
+                    <p>Explore my projects on <a href="https://github.com/1dongguo1">GitHub</a> and videos on <a href="https://space.bilibili.com/597194489">Bilibili</a>.</p>
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About End -->
+
+    <!-- Portfolio Start -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2>My Projects</h2>
+            <p>Showcasing my skills in game development and programming.</p>
+            <div class="portfolio-container">
+                <div class="item">
+                    <a href="cs2-cheat.html">
+                        <img src="img/project1.jpg" alt="CS2 Internal Cheat Project">
+                    </a>
+                    <h4>CS2 Internal Cheat Project <span>Game Development</span></h4>
+                    <a class="btn btn-details" href="cs2-cheat.html">Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio End -->
+
+    <!-- Contact Start -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Reach out via email or social media!</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <p><i class="fa fa-user"></i> Ray Tian</p>
+                        <p><i class="fa fa-tag"></i> Web Developer</p>
+                        <p><i class="fa fa-envelope"></i> <a href="mailto:3124169878@qq.com">My email</a></p>
+                        <div class="social">
+                            <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                            <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <button type="button" class="btn" id="contact-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Scripts -->
+    <script>
+        // 导航栏滚动效果
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.header').addClass('scrolled');
+            } else {
+                $('.header').removeClass('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
