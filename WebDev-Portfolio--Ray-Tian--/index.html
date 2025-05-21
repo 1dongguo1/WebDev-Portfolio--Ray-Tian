@@ -249,10 +249,10 @@
     </style>
 </head>
 <body>
-    <!-- 添加音频元素 -->
+    <!-- Add audio element -->
     <audio id="bg-music" style="display: none;"></audio>
     
-    <!-- 添加音频可视化器容器 -->
+    <!-- Add audio visualizer container -->
     <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
 
     <!-- Header Start -->
@@ -311,12 +311,29 @@
             <h2>My Projects</h2>
             <p>Showcasing my skills in game development and programming.</p>
             <div class="portfolio-container">
+                <!-- Cs2internal cheat project -->
                 <div class="item">
                     <a href="cs2-cheat.html">
                         <img src="img/project1.jpg" alt="CS2 Internal Cheat Project">
                     </a>
                     <h4>CS2 Internal Cheat Project <span>Game Development</span></h4>
                     <a class="btn btn-details" href="cs2-cheat.html">Details</a>
+                </div>
+                <!-- AES Encrypt/Decrypt Tool project -->
+                <div class="item">
+                    <a href="aes-encrypt-decrypt.html">
+                        <img src="img/project2.jpg" alt="AES Encrypt/Decrypt Tool">
+                    </a>
+                    <h4>AES Encrypt/Decrypt Tool <span>C++ / Encryption Tool</span></h4>
+                    <a class="btn btn-details" href="aes-encrypt-decrypt.html">Details</a>
+                </div>
+                <!-- Listening Music project -->
+                <div class="item">
+                    <a href="music-hobby.html">
+                        <img src="img/project3.jpg" alt="My Hobby: Listening to Music">
+                    </a>
+                    <h4>My Hobby: Listening to Music <span>Hobby</span></h4>
+                    <a class="btn btn-details" href="music-hobby.html">Details</a>
                 </div>
             </div>
         </div>
@@ -378,7 +395,7 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <!-- 添加jQuery UI Easing库 -->
+    <!-- Add jQuery UI Easing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     <script src="js/main.js"></script>
@@ -386,7 +403,7 @@
     <!-- Scripts -->
     <script>
         $(document).ready(function() {
-            // 导航栏滚动效果
+            // Navigation bar scroll effect
             $(window).scroll(function() {
                 if ($(this).scrollTop() > 50) {
                     $('.header').addClass('scrolled');

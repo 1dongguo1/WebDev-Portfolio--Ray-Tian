@@ -133,6 +133,7 @@
             cursor: pointer;
         }
         body {
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
             padding-top: 80px;
         }
         @media (max-width: 1400px) {
@@ -263,8 +264,29 @@
             color: #e0e0e0;
         }
         .design-thinking-section {
+            position: relative;
+            background: linear-gradient(135deg, #e0eafc 60%, #b3e0ff 100%);
             padding: 100px 0;
-            background: #f8f9fa;
+        }
+        .design-thinking-section::before {
+            content: "";
+            position: absolute;
+            top: 40px; left: 5%;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, #b3e0ff 0%, transparent 70%);
+            z-index: 0;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .design-thinking-section::after {
+            content: "";
+            position: absolute;
+            bottom: 60px; right: 8%;
+            width: 180px; height: 100px;
+            background: radial-gradient(circle, #cfdef3 0%, transparent 80%);
+            z-index: 0;
+            opacity: 0.22;
+            pointer-events: none;
         }
         .process-step {
             background: white;
@@ -326,7 +348,7 @@
 </head>
 <body>
     <!-- 添加音频元素 -->
-    <audio id="bg-music" style="display: none;" src="audio/background.mp3" loop></audio>
+    <audio id="bg-music" style="display: none;" src="audio/Break.mp3" loop></audio>
     
     <!-- 添加音频可视化器容器 -->
     <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);">

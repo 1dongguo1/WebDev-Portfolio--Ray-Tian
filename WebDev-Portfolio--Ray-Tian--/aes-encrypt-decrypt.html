@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AES Encrypt/Decrypt Tool - Ray Tian's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="AES, Encryption, Decryption, C++, OpenSSL, Portfolio">
+    <meta name="description" content="Project: AES Encrypt/Decrypt Tool - C++ tool for AES-256 encryption and decryption using OpenSSL.">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            padding-top: 80px; /* 适配固定导航栏 */
+        }
+        .project-header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .project-header h1 {
+            color: #1e90ff;
+            font-weight: 700;
+        }
+        .project-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(30,144,255,0.10), 0 1.5px 6px rgba(135,206,250,0.08);
+            padding: 40px 30px;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+        .project-section ul {
+            margin-left: 20px;
+        }
+        .btn-back {
+            display: inline-block;
+            margin: 30px auto 0 auto;
+            background: #1e90ff;
+            color: #fff;
+            border-radius: 6px;
+            padding: 10px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .btn-back:hover {
+            background: #87CEFA;
+            color: #fff;
+        }
+        /* 导航栏样式，与 index.html 一致 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: flex-start;
+            align-items: center;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+            gap: 4px;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+        .nav-menu li {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 2px 1px;
+            font-size: 0.6rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                gap: 3px;
+            }
+            .nav-menu a {
+                font-size: 0.55rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                gap: 2px;
+            }
+            .nav-menu a {
+                font-size: 0.5rem;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 1px;
+            }
+            .nav-menu a {
+                font-size: 0.45rem;
+            }
+            .logo {
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+            .social-nav {
+                min-width: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add audio element -->
+    <audio id="bg-music" style="display: none;"></audio>
+    <!-- Add audio visualizer container -->
+    <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
+    <!-- Header Start -->
+    <header class="top-header" id="top-header">
+        <div class="container text-center">
+            <img src="img/profile-pic.jpg" alt="Ray Tian's profile picture" class="profile-img">
+            <h1>Ray Tian</h1>
+            <p>Web Developer | Programmer | Content Creator</p>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Nav Start -->
+    <nav class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="index.html#top-header">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="design-thinking.html">Design Thinking</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </nav>
+    <!-- Nav End -->
+
+    <div class="project-header">
+        <h1>AES Encrypt/Decrypt Tool</h1>
+        <p class="lead">A C++ tool for AES-256 encryption and decryption based on OpenSSL</p>
+        <img src="img/project2.jpg" alt="AES Encrypt/Decrypt Tool" style="max-width:340px;width:100%;border-radius:16px;box-shadow:0 4px 24px rgba(30,144,255,0.13);margin:32px auto 0 auto;display:block;">
+    </div>
+    <div class="project-section">
+        <h3>Project Overview</h3>
+        <p>This project is a C++ tool for AES-256 encryption and decryption, implemented with the OpenSSL library. It supports Base64 encoding for output, making it suitable for secure communication and data protection scenarios.</p>
+        <h4>Main Features</h4>
+        <ul>
+            <li>Supports AES-256-CBC mode encryption and decryption</li>
+            <li>Automatic Base64 encoding for encrypted results</li>
+            <li>Automatic Base64 decoding for decryption</li>
+            <li>Exception handling and error messages</li>
+        </ul>
+        <h4>Tech Stack</h4>
+        <ul>
+            <li>C++</li>
+            <li>OpenSSL</li>
+        </ul>
+    </div>
+    <div style="text-align:center;">
+        <a class="btn-back" href="index.html#portfolio"><i class="fa fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- JS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- 导航栏滚动效果 -->
+    <script>
+        $(document).ready(function() {
+            // Navigation bar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.header').addClass('scrolled');
+                } else {
+                    $('.header').removeClass('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

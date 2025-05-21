@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Music Hobby - Ray Tian's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Music, Hobby, Portfolio, Ray Tian, Music Creation">
+    <meta name="description" content="Explore Ray Tian's passion for music creation, appreciation, and production techniques.">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #A5B4FC 0%, #6B7280 100%);
+            color: #1F2937;
+            font-family: 'Poppins', sans-serif;
+            padding-top: 80px; /* Adapt to fixed navbar */
+            margin: 0;
+            min-height: 100vh;
+        }
+        /* Navbar styles, consistent with index.html */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: flex-start;
+            align-items: center;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+            gap: 4px;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+        .nav-menu li {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 2px 1px;
+            font-size: 0.6rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                gap: 3px;
+            }
+            .nav-menu a {
+                font-size: 0.55rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                gap: 2px;
+            }
+            .nav-menu a {
+                font-size: 0.5rem;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 1px;
+            }
+            .nav-menu a {
+                font-size: 0.45rem;
+            }
+            .logo {
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+            .social-nav {
+                min-width: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+        /* Header Section */
+        .top-header {
+            padding: 60px 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+        .top-header img.profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .top-header h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .top-header p {
+            color: #E5E7EB;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        /* Music Section */
+        .music-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+        .music-header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in;
+        }
+        .music-header h1 {
+            color: #fff;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .music-header p.lead {
+            color: #D1D5DB;
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .music-header img {
+            max-width: 400px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin: 20px auto 0;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .music-header img:hover {
+            transform: scale(1.05);
+        }
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-in;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .card h3 {
+            color: #1E90FF;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .card p {
+            color: #4B5563;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .card ul {
+            margin-left: 20px;
+            color: #4B5563;
+        }
+        .card ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        /* Back to Portfolio Button */
+        .btn-back {
+            display: inline-block;
+            margin: 30px auto;
+            background: #1E90FF;
+            color: #fff;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+            text-align: center;
+        }
+        .btn-back:hover {
+            background: #87CEFA;
+            transform: translateY(-2px);
+        }
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1E90FF;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.2rem;
+            z-index: 1000;
+            display: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .back-to-top:hover {
+            background: #87CEFA;
+            transform: translateY(-3px);
+        }
+        .back-to-top.show {
+            display: block;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .music-header h1 {
+                font-size: 2rem;
+            }
+            .music-header p.lead {
+                font-size: 1rem;
+            }
+            .card {
+                padding: 20px;
+            }
+            .card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Start -->
+    <header class="top-header" id="top-header">
+        <div class="container text-center">
+            <img src="img/profile-pic.jpg" alt="Ray Tian's profile picture" class="profile-img">
+            <h1>Ray Tian</h1>
+            <p>Web Developer | Programmer | Content Creator</p>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Nav Start -->
+    <nav class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="index.html#top-header">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="design-thinking.html">Design Thinking</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </nav>
+    <!-- Nav End -->
+
+    <!-- Music Section -->
+    <section class="music-section">
+        <div class="music-header">
+            <h1>My Music Hobby</h1>
+            <p class="lead">Exploring the art of music creation, appreciation, and production techniques</p>
+            <img src="img/music-hobby.png" alt="Music Hobby">
+        </div>
+        <div class="card">
+            <h3>About My Music Journey</h3>
+            <p>Music is a vital part of my life, fueling my creativity and providing a creative outlet. From composing original tracks to exploring diverse genres, my music hobby reflects my passion for sound and expression.</p>
+        </div>
+        <div class="card">
+            <h3>Main Interests</h3>
+            <ul>
+                <li>Creating original music using digital audio workstations (DAWs)</li>
+                <li>Exploring genres like electronic, classical, and pop</li>
+                <li>Sharing music recommendations and reviews on social platforms</li>
+                <li>Learning music production techniques and sound design</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Favorite Tools</h3>
+            <ul>
+                <li>FL Studio: A versatile DAW for music production</li>
+                <li>Ableton Live: Ideal for live performances and composition</li>
+                <li>Virtual Instruments: Serum, Kontakt, and Omnisphere for sound design</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Music Inspirations</h3>
+            <p>My music is inspired by artists like Hans Zimmer, Skrillex, and Yiruma, whose work blends technical skill with emotional depth. I aim to create music that resonates with listeners on a personal level.</p>
+        </div>
+        <div style="text-align: center;">
+            <a class="btn-back" href="index.html#portfolio"><i class="fa fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </section>
+    <!-- Music Player Bar -->
+    <div id="music-player-bar" style="position: fixed; left: 0; bottom: 0; width: 100%; background: rgba(30,144,255,0.97); color: #fff; display: flex; align-items: center; justify-content: center; height: 60px; z-index: 1200; box-shadow: 0 -2px 10px rgba(0,0,0,0.12);">
+        <button id="music-play-toggle" style="background: none; border: none; color: #fff; font-size: 2rem; margin-right: 18px; outline: none; cursor: pointer;">
+            <i id="music-play-icon" class="fa fa-play"></i>
+        </button>
+        <span style="font-size: 1.1rem; font-weight: 500;">Ray Tian's song.mp3</span>
+        <audio id="my-music-audio" src="audio/Ray Tian's song.mp3"></audio>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- JS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Navbar and Back to Top Scroll Effects -->
+    <script>
+        $(document).ready(function() {
+            // Navigation bar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.header').addClass('scrolled');
+                    $('.back-to-top').addClass('show');
+                } else {
+                    $('.header').removeClass('scrolled');
+                    $('.back-to-top').removeClass('show');
+                }
+            });
+            // Smooth scroll for back-to-top
+            $('.back-to-top').click(function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 800, 'easeInOutExpo');
+            });
+            // Music player bar play/pause
+            const audio = document.getElementById('my-music-audio');
+            const playBtn = document.getElementById('music-play-toggle');
+            const playIcon = document.getElementById('music-play-icon');
+            let isPlaying = false;
+            playBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                } else {
+                    audio.play();
+                }
+            });
+            audio.addEventListener('play', function() {
+                isPlaying = true;
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+            });
+            audio.addEventListener('pause', function() {
+                isPlaying = false;
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+            });
+        });
+    </script>
+</body>
+</html>
