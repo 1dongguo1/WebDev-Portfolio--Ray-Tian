@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Design Thinking - Ray Tian's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Design Thinking, UX Design, Portfolio">
+    <meta name="description" content="Ray Tian's Design Thinking Process - Understanding how I approach web design and development">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 1000;
+            background: rgba(30, 144, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .header.scrolled {
+            height: 60px;
+            background: rgba(30, 144, 255, 0.98);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 15px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .logo {
+            margin: 0;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            justify-content: flex-start;
+            align-items: center;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+            gap: 4px;
+            flex-wrap: nowrap;
+            min-width: 0;
+        }
+        .nav-menu li {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 2px 1px;
+            font-size: 0.6rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            display: block;
+            letter-spacing: 0px;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #87CEFA;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-menu a:hover {
+            color: #87CEFA;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .social-nav {
+            margin-left: 10px;
+            flex-shrink: 0;
+            min-width: 70px;
+            text-align: right;
+        }
+        .social-nav a {
+            color: #fff;
+            margin-left: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .social-nav a:hover {
+            color: #87CEFA;
+            transform: translateY(-2px);
+        }
+        .mobile-nav-toggle {
+            display: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        body {
+            padding-top: 80px;
+        }
+        @media (max-width: 1400px) {
+            .nav-menu {
+                gap: 3px;
+            }
+            .nav-menu a {
+                font-size: 0.55rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .nav-menu {
+                gap: 2px;
+            }
+            .nav-menu a {
+                font-size: 0.5rem;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 1px;
+            }
+            .nav-menu a {
+                font-size: 0.45rem;
+            }
+            .logo {
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+            .social-nav {
+                min-width: 40px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                height: 60px;
+            }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(30, 144, 255, 0.98);
+                padding: 10px 0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .mobile-nav-toggle {
+                display: block;
+            }
+            body {
+                padding-top: 60px;
+            }
+            .social-nav {
+                margin: 0;
+            }
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(30, 144, 255, 0.98);
+            min-width: 300px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 10px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .dropdown-content.show {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        .design-thinking-content {
+            color: white;
+            padding: 10px;
+        }
+        .design-thinking-content h4 {
+            color: #87CEFA;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            border-bottom: 2px solid #87CEFA;
+            padding-bottom: 10px;
+        }
+        .design-thinking-content ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .design-thinking-content li {
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            position: relative;
+        }
+        .design-thinking-content strong {
+            color: #87CEFA;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        .design-thinking-content p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #e0e0e0;
+        }
+        .design-thinking-section {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+        .process-step {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+        .process-step h3 {
+            color: #1e90ff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .process-step p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .step-number {
+            background: #1e90ff;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .audio-controls {
+            position: fixed;
+            bottom: 110px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        .audio-controls button {
+            background: rgba(30, 144, 255, 0.95);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .audio-controls button:hover {
+            background: #87CEFA;
+        }
+        #audio-visualizer canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加音频元素 -->
+    <audio id="bg-music" style="display: none;" src="audio/background.mp3" loop></audio>
+    
+    <!-- 添加音频可视化器容器 -->
+    <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);">
+        <canvas id="visualizer-canvas"></canvas>
+    </div>
+
+    <!-- Nav Start -->
+    <nav class="header">
+        <div class="container">
+            <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
+            <ul class="nav-menu">
+                <li><a href="index.html#top-header">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="global-goals.html">Global Goals</a></li>
+                <li><a href="accessibility.html">Accessibility</a></li>
+                <li><a href="design-thinking.html">Design Thinking</a></li>
+            </ul>
+            <div class="social-nav">
+                <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
+                <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    <!-- Nav End -->
+
+    <!-- Design Thinking Section Start -->
+    <section class="design-thinking-section">
+        <div class="container">
+            <h2 class="text-center mb-5">My Design Thinking Process</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Empathize</h3>
+                        <p>Understanding user needs through research and interviews. For example, when developing this portfolio website, I first analyzed the expectations and needs of potential visitors, such as clear navigation and engaging visuals.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Define</h3>
+                        <p>Based on user research, identifying core problems and design goals. I determined key features to showcase, such as project displays, skill introductions, and accessibility considerations.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Ideate</h3>
+                        <p>Brainstorming multiple solutions to enhance user experience. I explored various layouts, interaction patterns, and visual designs to create an intuitive and aesthetically pleasing website.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Prototype</h3>
+                        <p>Creating interactive prototypes using tools like Figma to visualize ideas. Low-fidelity prototypes were developed to validate concepts quickly before coding the final website.</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h3>Test</h3>
+                        <p>Collecting user feedback through usability testing and iterating based on results. I ensured the website is accessible, responsive, and user-friendly across devices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Design Thinking Section End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Ray Tian. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <!-- Audio Visualizer and Controls -->
+    <script>
+        $(document).ready(function() {
+            // 导航栏滚动效果
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.header').addClass('scrolled');
+                } else {
+                    $('.header').removeClass('scrolled');
+                }
+            });
+
+            // 移动端导航切换
+            $('#mobile-nav-toggle').on('click', function() {
+                $('.nav-menu').toggleClass('active');
+            });
+
+            // 点击页面其他区域关闭移动端导航
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.nav-menu, #mobile-nav-toggle').length) {
+                    $('.nav-menu').removeClass('active');
+                }
+            });
+
+            // 音频播放控制
+            const audio = document.getElementById('bg-music');
+            const visualizer = document.getElementById('audio-visualizer');
+            const canvas = document.getElementById('visualizer-canvas');
+            const ctx = canvas.getContext('2d');
+            let isPlaying = false;
+
+            // 设置canvas尺寸
+            canvas.width = 200;
+            canvas.height = 80;
+
+            // 检查本地存储中的播放状态
+            const wasPlaying = localStorage.getItem('musicPlaying') === 'true';
+            if (wasPlaying) {
+                audio.play();
+                isPlaying = true;
+            }
+
+            // 音频可视化
+            function drawVisualizer() {
+                if (!isPlaying) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    requestAnimationFrame(drawVisualizer);
+                    return;
+                }
+
+                // 创建渐变背景
+                const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, 'rgba(135, 206, 250, 0.2)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0.7)');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // 绘制波浪效果
+                const time = Date.now() * 0.001;
+                const amplitude = 20;
+                const frequency = 0.05;
+                const speed = 2;
+
+                // 绘制多条波浪线
+                for (let i = 0; i < 3; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, canvas.height / 2);
+
+                    for (let x = 0; x < canvas.width; x++) {
+                        const y = canvas.height / 2 + 
+                            Math.sin(x * frequency + time * speed + i * Math.PI / 3) * amplitude * (1 - i * 0.2) +
+                            Math.sin(x * frequency * 2 + time * speed * 1.5 + i * Math.PI / 3) * amplitude * 0.5 * (1 - i * 0.2);
+                        ctx.lineTo(x, y);
+                    }
+
+                    ctx.strokeStyle = `rgba(135, 206, 250, ${0.8 - i * 0.2})`;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                requestAnimationFrame(drawVisualizer);
+            }
+
+            // 开始绘制可视化效果
+            drawVisualizer();
+
+            // 可视化器点击事件
+            visualizer.addEventListener('click', function() {
+                if (!isPlaying) {
+                    audio.play();
+                    isPlaying = true;
+                    localStorage.setItem('musicPlaying', 'true');
+                } else {
+                    audio.pause();
+                    isPlaying = false;
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

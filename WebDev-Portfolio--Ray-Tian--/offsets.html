@@ -74,24 +74,29 @@
             margin: 0;
             padding: 0;
             list-style: none;
-            justify-content: center;
-            flex: 1;
-            min-width: 450px;
-            max-width: 900px;
+            justify-content: flex-start;
+            align-items: center;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+            gap: 4px;
+            flex-wrap: nowrap;
+            min-width: 0;
         }
         .nav-menu li {
-            margin: 0 6px;
+            position: relative;
+            flex-shrink: 0;
         }
         .nav-menu a {
             color: #fff;
             text-decoration: none;
-            padding: 5px 4px;
-            font-size: 0.85rem;
+            padding: 2px 1px;
+            font-size: 0.6rem;
             transition: all 0.3s ease;
             position: relative;
             white-space: nowrap;
             display: block;
-            letter-spacing: 0.2px;
+            letter-spacing: 0px;
         }
         .nav-menu a::after {
             content: '';
@@ -190,46 +195,33 @@
         }
         @media (max-width: 1400px) {
             .nav-menu {
-                min-width: 400px;
-            }
-            .nav-menu li {
-                margin: 0 4px;
+                gap: 3px;
             }
             .nav-menu a {
-                padding: 5px 3px;
-                font-size: 0.8rem;
+                font-size: 0.55rem;
             }
         }
         @media (max-width: 1200px) {
             .nav-menu {
-                min-width: 350px;
-            }
-            .nav-menu li {
-                margin: 0 3px;
+                gap: 2px;
             }
             .nav-menu a {
-                padding: 5px 2px;
-                font-size: 0.75rem;
-            }
-            .logo {
-                font-size: 1.2rem;
-                min-width: 100px;
+                font-size: 0.5rem;
             }
         }
         @media (max-width: 992px) {
             .nav-menu {
-                min-width: 300px;
-            }
-            .nav-menu li {
-                margin: 0 2px;
+                gap: 1px;
             }
             .nav-menu a {
-                padding: 5px 2px;
-                font-size: 0.7rem;
+                font-size: 0.45rem;
             }
             .logo {
-                font-size: 1.1rem;
-                min-width: 90px;
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+            .social-nav {
+                min-width: 40px;
             }
         }
         @media (max-width: 768px) {
@@ -371,24 +363,25 @@
     </style>
 </head>
 <body>
-    <!-- Header Start -->
-    <header class="header">
+    <!-- Nav Start -->
+    <nav class="header">
         <div class="container">
             <h1 class="logo"><a href="index.html">Ray's Portfolio</a></h1>
             <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#top-header">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#portfolio">Portfolio</a></li>
                 <li><a href="global-goals.html">Global Goals</a></li>
                 <li><a href="accessibility.html">Accessibility</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="design-thinking.html">Design Thinking</a></li>
             </ul>
             <div class="social-nav">
                 <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
                 <a href="https://github.com/1dongguo1"><i class="fa fa-github"></i></a>
             </div>
         </div>
-    </header>
+    </nav>
+    <!-- Nav End -->
 
     <!-- Content Start -->
     <section class="content">
