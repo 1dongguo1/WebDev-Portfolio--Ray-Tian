@@ -373,7 +373,7 @@
                 <li><a href="index.html#portfolio">Portfolio</a></li>
                 <li><a href="global-goals.html">Global Goals</a></li>
                 <li><a href="accessibility.html">Accessibility</a></li>
-                <li><a href="design-thinking.html">Design Thinking</a></li>
+                <li><a href="design-thinking.html">Design</a></li>
             </ul>
             <div class="social-nav">
                 <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
@@ -507,16 +507,31 @@ namespace cs2_dumper {
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="js/main.js"></script>
 
     <script>
-        // 导航栏滚动效果
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 50) {
-                $('.header').addClass('scrolled');
-            } else {
-                $('.header').removeClass('scrolled');
-            }
+        $(document).ready(function() {
+            // Navigation bar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.header').addClass('scrolled');
+                } else {
+                    $('.header').removeClass('scrolled');
+                }
+                // 返回顶部按钮显示/隐藏
+                if ($(this).scrollTop() > 0) {
+                    $('.back-to-top').fadeIn('slow').addClass('show');
+                } else {
+                    $('.back-to-top').fadeOut('slow').removeClass('show');
+                }
+            });
+            // 平滑滚动到顶部
+            $('.back-to-top').click(function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+                return false;
+            });
         });
     </script>
 

@@ -43,4 +43,7 @@ Welcome to my Web Development Portfolio, this is for showcasing my skills and pr
 
 ⚠️ Important Notes 
 Memory offsets require regular updates when the game is patched.
-  
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/1dongguo1/WebDev-Portfolio--Ray-Tian)
+
+<!-- ### This is for DeepWiki to update -->

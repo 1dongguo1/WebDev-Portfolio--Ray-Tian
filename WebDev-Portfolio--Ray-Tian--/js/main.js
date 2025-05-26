@@ -110,64 +110,6 @@ $(document).ready(function() {
         });
     }
 
-    // 确保所有页面都有返回顶部按钮
-    if (!$('.back-to-top').length) {
-        $('body').append('<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>');
-    }
-
-    // 返回顶部按钮样式
-    $('<style>')
-        .text(`
-            .back-to-top {
-                position: fixed;
-                left: 15px;
-                bottom: 15px;
-                display: none;
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                background: #1E90FF;
-                color: #fff;
-                border-radius: 50%;
-                z-index: 999;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            }
-            .back-to-top:hover {
-                background: #187bcd;
-                color: #fff;
-                transform: translateY(-3px);
-            }
-            .back-to-top i {
-                font-size: 20px;
-                line-height: 40px;
-            }
-            .nav-menu {
-                display: flex;
-                margin: 0;
-                padding: 0;
-                list-style: none;
-                justify-content: center;
-                flex: 1;
-                min-width: 600px;
-            }
-            .nav-menu li {
-                margin: 0 10px;
-            }
-            .nav-menu a {
-                color: #fff;
-                text-decoration: none;
-                padding: 5px 8px;
-                font-size: 0.95rem;
-                transition: all 0.3s ease;
-                position: relative;
-                white-space: nowrap;
-            }
-        `)
-        .appendTo('head');
-
     // Smooth scroll for anchor links
     $('a[href*="#"]:not([href="#"])').on('click', function() {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -197,20 +139,6 @@ $(document).ready(function() {
             }, 100);
         }
     }
-
-    // Back to top button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('.back-to-top').fadeIn('slow');
-        } else {
-            $('.back-to-top').fadeOut('slow');
-        }
-    });
-
-    $('.back-to-top').click(function() {
-        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
-        return false;
-    });
 
     // ------------- 音频播放器和可视化波浪条功能 -------------
 

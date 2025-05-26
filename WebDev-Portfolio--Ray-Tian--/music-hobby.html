@@ -285,8 +285,8 @@
         /* Back to Top Button */
         .back-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 80px; /* Adjusted to avoid music player bar */
+            left: 20px; /* Changed to left side to match index.html */
             background: #1E90FF;
             color: #fff;
             width: 50px;
@@ -295,7 +295,7 @@
             text-align: center;
             line-height: 50px;
             font-size: 1.2rem;
-            z-index: 1000;
+            z-index: 1300; /* Higher than music-player-bar (1200) */
             display: none;
             transition: background 0.3s, transform 0.3s;
         }
@@ -337,6 +337,13 @@
             .card h3 {
                 font-size: 1.5rem;
             }
+            .back-to-top {
+                bottom: 70px;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -361,7 +368,7 @@
                 <li><a href="index.html#portfolio">Portfolio</a></li>
                 <li><a href="global-goals.html">Global Goals</a></li>
                 <li><a href="accessibility.html">Accessibility</a></li>
-                <li><a href="design-thinking.html">Design Thinking</a></li>
+                <li><a href="design.html">Design</a></li>
             </ul>
             <div class="social-nav">
                 <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
@@ -416,7 +423,7 @@
         <audio id="my-music-audio" src="audio/Ray Tian's song.mp3"></audio>
     </div>
     <!-- Back to Top -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <a href="#" class="back-to-top" title="Back to Top" role="button" aria-label="Back to Top"><i class="fa fa-chevron-up"></i></a>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -428,23 +435,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="js/main.js"></script>
-    <!-- Navbar and Back to Top Scroll Effects -->
     <script>
         $(document).ready(function() {
-            // Navigation bar scroll effect
+            // 返回顶部按钮显示/隐藏
             $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('.header').addClass('scrolled');
-                    $('.back-to-top').addClass('show');
+                if ($(this).scrollTop() > 0) {
+                    $('.back-to-top').fadeIn('slow').addClass('show');
                 } else {
-                    $('.header').removeClass('scrolled');
-                    $('.back-to-top').removeClass('show');
+                    $('.back-to-top').fadeOut('slow').removeClass('show');
                 }
             });
-            // Smooth scroll for back-to-top
+            // 平滑滚动到顶部
             $('.back-to-top').click(function(e) {
                 e.preventDefault();
-                $('html, body').animate({ scrollTop: 0 }, 800, 'easeInOutExpo');
+                $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+                return false;
             });
             // Music player bar play/pause
             const audio = document.getElementById('my-music-audio');
@@ -455,7 +460,7 @@
                 if (isPlaying) {
                     audio.pause();
                 } else {
-                    audio.play();
+                    audio.play().catch(err => console.error('Audio play failed:', err));
                 }
             });
             audio.addEventListener('play', function() {

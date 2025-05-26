@@ -227,7 +227,7 @@
                 <li><a href="index.html#portfolio">Portfolio</a></li>
                 <li><a href="global-goals.html">Global Goals</a></li>
                 <li><a href="accessibility.html">Accessibility</a></li>
-                <li><a href="design-thinking.html">Design Thinking</a></li>
+                <li><a href="design-thinking.html">Design</a></li>
             </ul>
             <div class="social-nav">
                 <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
@@ -281,6 +281,18 @@
                 } else {
                     $('.header').removeClass('scrolled');
                 }
+                // 返回顶部按钮显示/隐藏
+                if ($(this).scrollTop() > 0) {
+                    $('.back-to-top').fadeIn('slow').addClass('show');
+                } else {
+                    $('.back-to-top').fadeOut('slow').removeClass('show');
+                }
+            });
+            // 平滑滚动到顶部
+            $('.back-to-top').click(function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+                return false;
             });
         });
     </script>

@@ -334,7 +334,7 @@
                 <li><a href="index.html#portfolio">Portfolio</a></li>
                 <li><a href="global-goals.html">Global Goals</a></li>
                 <li><a href="accessibility.html">Accessibility</a></li>
-                <li><a href="design-thinking.html">Design Thinking</a></li>
+                <li><a href="design.html">Design</a></li>
             </ul>
             <div class="social-nav">
                 <a href="https://space.bilibili.com/597194489"><i class="fa fa-video-camera"></i></a>
@@ -507,12 +507,37 @@ bool ESP::Start()
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <!-- 删除 superfish、sticky 相关依赖 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="js/main.js"></script>
 
     <!-- 音乐播放器（隐藏） -->
     <audio id="bg-music" src="audio/Break.mp3" loop style="display:none"></audio>
     <!-- 波浪条 -->
     <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
+
+    <script>
+        $(document).ready(function() {
+            // Navigation bar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.header').addClass('scrolled');
+                } else {
+                    $('.header').removeClass('scrolled');
+                }
+                // 返回顶部按钮显示/隐藏
+                if ($(this).scrollTop() > 0) {
+                    $('.back-to-top').fadeIn('slow').addClass('show');
+                } else {
+                    $('.back-to-top').fadeOut('slow').removeClass('show');
+                }
+            });
+            // 平滑滚动到顶部
+            $('.back-to-top').click(function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+                return false;
+            });
+        });
+    </script>
 </body>
 </html>
