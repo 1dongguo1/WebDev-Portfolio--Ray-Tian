@@ -1,47 +1,47 @@
 $(document).ready(function() {
     "use strict";
 
-    // 保存音乐播放状态到localStorage
+    // save music playing state to localStorage
     function saveMusicState(isPlaying) {
         localStorage.setItem('musicPlaying', isPlaying);
         localStorage.setItem('musicStateChange', Date.now());
     }
 
-    // 获取音乐播放状态
+    // get music playing state
     function getMusicState() {
         const state = localStorage.getItem('musicPlaying');
         return state === 'true';
     }
 
-    // 保存音乐播放时间
+    // save music playing time
     function saveMusicTime(time) {
         localStorage.setItem('musicTime', time);
     }
 
-    // 获取音乐播放时间
+    // get music playing time
     function getMusicTime() {
         return localStorage.getItem('musicTime') || 0;
     }
 
-    // 保存当前播放音乐的标签页ID
+    // save current playing music tab ID
     function setActiveTabId(tabId) {
         localStorage.setItem('musicActiveTabId', tabId);
     }
 
-    // 获取当前播放音乐的标签页ID
+    // get current playing music tab ID
     function getActiveTabId() {
         return localStorage.getItem('musicActiveTabId');
     }
 
-    // 为当前标签页生成一个唯一的ID
+    // generate a unique ID for the current tab
     const currentTabId = 'tab-' + Math.random().toString(36).substr(2, 9);
 
-    // 检查当前标签页是否是活跃的播放标签页
+    // check if the current tab is the active playing tab
     function isCurrentTabActive() {
         return getActiveTabId() === currentTabId;
     }
 
-    // 背景图片轮换
+    // background image rotation
     const backgrounds = [
         'img/bg1.jpg',
         'img/bg2.jpg',
@@ -53,13 +53,13 @@ $(document).ready(function() {
 
     let currentBg = 0;
 
-    // 预加载所有背景图片
+    // preload all background images
     backgrounds.forEach(src => {
         const img = new Image();
         img.src = src;
     });
 
-    // 设置初始背景
+    // set initial background
     const header = document.querySelector('.top-header');
     if (header) {
         header.style.backgroundImage = `url(${backgrounds[0]})`;
@@ -71,12 +71,12 @@ $(document).ready(function() {
         
         currentBg = (currentBg + 1) % backgrounds.length;
         
-        // 使用 CSS transition 实现平滑过渡
+        // use CSS transition to achieve smooth transition
         header.style.transition = 'background-image 0.3s ease-in-out';
         header.style.backgroundImage = `url(${backgrounds[currentBg]})`;
     }
 
-    // 每3秒切换一次背景
+    // switch background every 3 seconds
     setInterval(switchBackground, 3000);
 
     // Mobile Navigation
@@ -140,7 +140,7 @@ $(document).ready(function() {
         }
     }
 
-    // ------------- 音频播放器和可视化波浪条功能 -------------
+    // ------------- audio player and visualizer wave bar function -------------
 
     function setupAudioAndVisualizer() {
         const audio = document.getElementById('bg-music');
@@ -150,14 +150,14 @@ $(document).ready(function() {
             return;
         }
 
-        // 创建 canvas 元素
+        // create canvas element
         const canvas = document.createElement('canvas');
         canvas.width = visDiv.clientWidth;
         canvas.height = visDiv.clientHeight;
         visDiv.appendChild(canvas);
         const ctx = canvas.getContext('2d');
 
-        // 设置音频属性
+        // set audio properties
         audio.volume = 0.5;
         audio.loop = true;
         audio.preload = 'auto';
@@ -166,10 +166,10 @@ $(document).ready(function() {
         let audioCtx = null;
         let analyser;
         let source;
-        let isPlaying = getMusicState(); // 从localStorage获取播放状态
+        let isPlaying = getMusicState(); // get playing state from localStorage
         let animationFrameId = null;
 
-        // 设置 AudioContext
+        // set AudioContext
         function setupAudioCtx() {
             if (!audioCtx) {
                 try {
@@ -186,7 +186,7 @@ $(document).ready(function() {
             }
         }
 
-        // 开始播放
+        // start playback
         function startPlayback() {
             if (audioCtx && audioCtx.state === 'suspended') {
                 audioCtx.resume().then(() => {
@@ -207,7 +207,7 @@ $(document).ready(function() {
             }
         }
 
-        // 停止播放
+        // stop playback
         function stopPlayback() {
             if (!audio.paused) {
                 audio.pause();
@@ -223,7 +223,7 @@ $(document).ready(function() {
             }
         }
 
-        // 绘制可视化效果
+        // draw visualization effect
         function draw() {
             if (!analyser || !ctx || !isPlaying || audio.paused || (audioCtx && audioCtx.state !== 'running')) {
                 if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -259,7 +259,7 @@ $(document).ready(function() {
             }
         }
 
-        // 在Audio元数据加载完成后自动播放
+        // play automatically after Audio metadata is loaded
         audio.addEventListener('loadedmetadata', function() {
             console.log('Audio metadata loaded.');
             setupAudioCtx();
@@ -267,20 +267,20 @@ $(document).ready(function() {
             if (savedTime > 0) {
                 audio.currentTime = savedTime;
             }
-            // 如果之前是播放状态，则自动开始播放
+            // if the previous state is playing, start playback automatically
             if (isPlaying) {
                 startPlayback();
             }
         });
 
-        // 定期保存播放时间
+        // save playing time periodically
         audio.addEventListener('timeupdate', function() {
             if (isPlaying && isCurrentTabActive()) {
                 saveMusicTime(audio.currentTime);
             }
         });
 
-        // 点击可视化器切换播放状态
+        // click the visualizer to switch the playback state
         visDiv.addEventListener('click', function(e) {
             e.preventDefault();
             if (isPlaying) {
@@ -290,7 +290,7 @@ $(document).ready(function() {
             }
         });
 
-        // 监听其他标签页的状态变化
+        // listen to the state change of other tabs
         window.addEventListener('storage', function(e) {
             if (e.key === 'musicStateChange') {
                 const newState = getMusicState();
@@ -304,18 +304,18 @@ $(document).ready(function() {
             }
         });
 
-        // 页面关闭时保存状态
+        // save state when the page is closed
         window.addEventListener('beforeunload', function() {
             if (isPlaying && isCurrentTabActive()) {
                 saveMusicTime(audio.currentTime);
             }
         });
 
-        // 初始化
+        // initialize
         setupAudioCtx();
         audio.load();
     }
 
-    // 初始化音乐播放器和可视化
+    // initialize music player and visualizer
     setupAudioAndVisualizer();
 });

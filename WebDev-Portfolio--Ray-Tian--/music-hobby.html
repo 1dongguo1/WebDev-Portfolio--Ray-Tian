@@ -207,13 +207,13 @@
             animation: fadeIn 1s ease-in;
         }
         .music-header h1 {
-            color: #fff;
+            color: #000000;
             font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 15px;
         }
         .music-header p.lead {
-            color: #D1D5DB;
+            color: #000000;
             font-size: 1.2rem;
             font-weight: 300;
             max-width: 600px;
@@ -387,14 +387,14 @@
         </div>
         <div class="card">
             <h3>About My Music Journey</h3>
-            <p>Music is a vital part of my life, fueling my creativity and providing a creative outlet. From composing original tracks to exploring diverse genres, my music hobby reflects my passion for sound and expression.</p>
+            <p>Music is a vital part of my life, it can express my emotions and provide a creative outlet. My music hobby reflects my passion for sound and expression. When face some problems, I will listen to music to relax my mind and clear my head.</p>
         </div>
         <div class="card">
             <h3>Main Interests</h3>
             <ul>
-                <li>Creating original music using digital audio workstations (DAWs)</li>
+                <li>Creating original music</li>
                 <li>Exploring genres like electronic, classical, and pop</li>
-                <li>Sharing music recommendations and reviews on social platforms</li>
+                <li>Playing piano when I have free time</li>
                 <li>Learning music production techniques and sound design</li>
             </ul>
         </div>
@@ -402,13 +402,13 @@
             <h3>Favorite Tools</h3>
             <ul>
                 <li>FL Studio: A versatile DAW for music production</li>
-                <li>Ableton Live: Ideal for live performances and composition</li>
-                <li>Virtual Instruments: Serum, Kontakt, and Omnisphere for sound design</li>
+                <li>GarageBand: Very easy and user-friendly for all apple users.</li>
+                <li>Instruments: Piano, Guitar, etc.</li>
             </ul>
         </div>
         <div class="card">
             <h3>Music Inspirations</h3>
-            <p>My music is inspired by artists like Hans Zimmer, Skrillex, and Yiruma, whose work blends technical skill with emotional depth. I aim to create music that resonates with listeners on a personal level.</p>
+            <p>My music is inspired by artists like Mozart, Beethoven, and Chopin, those are the most famous classical music composers. I aim to create music that resonates with listeners on a personal level.</p>
         </div>
         <div style="text-align: center;">
             <a class="btn-back" href="index.html#portfolio"><i class="fa fa-arrow-left"></i> Back to Portfolio</a>
@@ -437,7 +437,7 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(function() {
-            // 返回顶部按钮显示/隐藏
+            // back to top button show/hide
             $(window).scroll(function() {
                 if ($(this).scrollTop() > 0) {
                     $('.back-to-top').fadeIn('slow').addClass('show');
@@ -445,7 +445,7 @@
                     $('.back-to-top').fadeOut('slow').removeClass('show');
                 }
             });
-            // 平滑滚动到顶部
+            // smooth scroll to top
             $('.back-to-top').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');

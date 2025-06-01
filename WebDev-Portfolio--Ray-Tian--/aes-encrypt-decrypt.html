@@ -12,10 +12,11 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <!-- template Stylesheet -->
     <style>
         body {
             background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
-            padding-top: 80px; /* 适配固定导航栏 */
+            padding-top: 80px;
         }
         .project-header {
             text-align: center;
@@ -53,7 +54,7 @@
             background: #87CEFA;
             color: #fff;
         }
-        /* 导航栏样式，与 index.html 一致 */
+
         .header {
             position: fixed;
             top: 0;
@@ -200,6 +201,38 @@
                 margin: 0;
             }
         }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #1E90FF;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.2rem;
+            z-index: 1300;
+            display: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .back-to-top:hover {
+            background: #87CEFA;
+            transform: translateY(-3px);
+        }
+        .back-to-top.show {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 10px;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -244,7 +277,7 @@
     </div>
     <div class="project-section">
         <h3>Project Overview</h3>
-        <p>This project is a C++ tool for AES-256 encryption and decryption, implemented with the OpenSSL library. It supports Base64 encoding for output, making it suitable for secure communication and data protection scenarios.</p>
+        <p>This project is a C++ tool for AES-256 encryption and decryption, implemented with the OpenSSL library. It supports Base64 encoding for output, making it suitable for secure communication. I made this project for a game named PVZ2 to decrypt the data files.</p>
         <h4>Main Features</h4>
         <ul>
             <li>Supports AES-256-CBC mode encryption and decryption</li>
@@ -257,6 +290,162 @@
             <li>C++</li>
             <li>OpenSSL</li>
         </ul>
+        <h3>Source Code</h3>
+        <pre><code class="language-cpp">
+#include &lt;openssl/aes.h&gt;
+#include &lt;openssl/rand.h&gt;
+#include &lt;openssl/bio.h&gt;
+#include &lt;openssl/buffer.h&gt;
+#include &lt;openssl/evp.h&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;stdexcept&gt;
+#include &lt;cstring&gt;
+
+// Function to encode data to Base64
+std::string base64_encode(const unsigned char* data, size_t len) {
+    BIO *bio, *b64;
+    BUF_MEM *bufferPtr;
+
+    b64 = BIO_new(BIO_f_base64());
+    bio = BIO_new(BIO_s_mem());
+    bio = BIO_push(b64, bio);
+
+    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // Do not add newlines
+    BIO_write(bio, data, len);
+    BIO_flush(bio);
+    BIO_get_mem_ptr(bio, &bufferPtr);
+
+    std::string result(bufferPtr->data, bufferPtr->length);
+    BIO_free_all(bio);
+
+    return result;
+}
+
+// Function to decode Base64 data
+std::vector<unsigned char> base64_decode(const std::string& encoded) {
+    BIO *bio, *b64;
+    std::vector<unsigned char> decoded(encoded.size());
+
+    bio = BIO_new_mem_buf(encoded.data(), encoded.size());
+    b64 = BIO_new(BIO_f_base64());
+    bio = BIO_push(b64, bio);
+
+    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // Do not handle newlines
+    int decoded_length = BIO_read(bio, decoded.data(), encoded.size());
+    decoded.resize(decoded_length);
+
+    BIO_free_all(bio);
+    return decoded;
+}
+
+// AES encryption function
+std::string aes_encrypt(const std::string& plaintext, const unsigned char* key, const unsigned char* iv) {
+    // Initialize OpenSSL encryption context
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) throw std::runtime_error("Failed to create encryption context");
+
+    // Initialize encryption operation with AES-256-CBC mode
+    if (EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key, iv) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Encryption initialization failed");
+    }
+
+    std::vector<unsigned char> ciphertext(plaintext.size() + AES_BLOCK_SIZE);
+    int len;
+    int ciphertext_len;
+
+    // Perform encryption
+    if (EVP_EncryptUpdate(ctx, ciphertext.data(), &len, (unsigned char*)plaintext.data(), plaintext.size()) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Encryption update failed");
+    }
+    ciphertext_len = len;
+
+    // Finalize encryption
+    if (EVP_EncryptFinal_ex(ctx, ciphertext.data() + len, &len) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Encryption finalization failed");
+    }
+    ciphertext_len += len;
+
+    EVP_CIPHER_CTX_free(ctx);
+
+    // Resize ciphertext and encode to Base64
+    ciphertext.resize(ciphertext_len);
+    return base64_encode(ciphertext.data(), ciphertext_len);
+}
+
+// AES decryption function
+std::string aes_decrypt(const std::string& ciphertext_b64, const unsigned char* key, const unsigned char* iv) {
+    // Decode Base64 input
+    std::vector<unsigned char> ciphertext = base64_decode(ciphertext_b64);
+
+    // Initialize OpenSSL decryption context
+    EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) throw std::runtime_error("Failed to create decryption context");
+
+    // Initialize decryption operation with AES-256-CBC mode
+    if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), nullptr, key, iv) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Decryption initialization failed");
+    }
+
+    std::vector<unsigned char> plaintext(ciphertext.size());
+    int len;
+    int plaintext_len;
+
+    // Perform decryption
+    if (EVP_DecryptUpdate(ctx, plaintext.data(), &len, ciphertext.data(), ciphertext.size()) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Decryption update failed");
+    }
+    plaintext_len = len;
+
+    // Finalize decryption
+    if (EVP_DecryptFinal_ex(ctx, plaintext.data() + len, &len) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        throw std::runtime_error("Decryption finalization failed");
+    }
+    plaintext_len += len;
+
+    EVP_CIPHER_CTX_free(ctx);
+
+    // Return plaintext
+    return std::string((char*)plaintext.data(), plaintext_len);
+}
+
+int main() {
+    // Key and IV (converted from provided hexadecimal strings)
+    unsigned char key[32] = {0x65, 0xbd, 0x1b, 0x23, 0x05, 0xf4, 0x6e, 0xb2,
+                            0x80, 0x6b, 0x93, 0x5a, 0xab, 0x76, 0x30, 0xbb,
+                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    unsigned char iv[16] = {0x1b, 0x23, 0x05, 0xf4, 0x6e, 0xb2, 0x80, 0x6b,
+                           0x93, 0x5a, 0xab, 0x76, 0x00, 0x00, 0x00, 0x00};
+
+    try {
+        // Test plaintext
+        std::string plaintext = "This is a test plaintext!";
+
+        // Encrypt
+        std::string ciphertext = aes_encrypt(plaintext, key, iv);
+        std::cout << "Base64-encoded ciphertext: " << ciphertext << std::endl;
+
+        // Decrypt
+        std::string decrypted = aes_decrypt(ciphertext, key, iv);
+        std::cout << "Decrypted plaintext: " << decrypted << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+        </code></pre>
+        <div style="text-align:center; margin-top: 20px;">
+            <a href="Aes_encrypt_decrypt.cpp" download class="btn-back"><i class="fa fa-download"></i> Download Aes_encrypt_decrypt.cpp</a>
+        </div>
     </div>
     <div style="text-align:center;">
         <a class="btn-back" href="index.html#portfolio"><i class="fa fa-arrow-left"></i> Back to Portfolio</a>
@@ -271,7 +460,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="js/main.js"></script>
-    <!-- 导航栏滚动效果 -->
+    <!-- navigation bar scroll effect -->
     <script>
         $(document).ready(function() {
             // Navigation bar scroll effect
@@ -281,14 +470,14 @@
                 } else {
                     $('.header').removeClass('scrolled');
                 }
-                // 返回顶部按钮显示/隐藏
+                // button to top
                 if ($(this).scrollTop() > 0) {
                     $('.back-to-top').fadeIn('slow').addClass('show');
                 } else {
                     $('.back-to-top').fadeOut('slow').removeClass('show');
                 }
             });
-            // 平滑滚动到顶部
+            // smooth scroll to top
             $('.back-to-top').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
@@ -296,5 +485,7 @@
             });
         });
     </script>
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" title="Back to Top" role="button" aria-label="Back to Top"><i class="fa fa-chevron-up"></i></a>
 </body>
 </html>

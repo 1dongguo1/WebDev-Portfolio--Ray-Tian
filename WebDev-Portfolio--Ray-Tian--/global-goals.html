@@ -214,7 +214,7 @@
             text-decoration: none;
         }
 
-        /* 树木交互样式 */
+        /* tree interaction style */
         .tree-interaction {
             position: relative;
             height: 400px;
@@ -270,7 +270,7 @@
             opacity: 1;
         }
 
-        /* 深色模式适配 */
+        /* dark mode adaptation */
         @media (prefers-color-scheme: dark) {
             body {
                 background: #1a1a1a;
@@ -305,7 +305,7 @@
             }
         }
 
-        /* 浅色模式适配 */
+        /* light mode adaptation */
         @media (prefers-color-scheme: light) {
             body {
                 background: #f5f5f5;
@@ -383,9 +383,9 @@
                 </div>
                 <div class="col-md-6">
                     <h3>Goal 13: Climate Action</h3>
-                    <p>Every person, in every country in every continent will be impacted in some shape or form by climate change. There is a climate cataclysm looming, and we are underprepared for what this could mean.
+                    <p style="text-align: justify;">Every person, in every country in every continent will be impacted in some shape or form by climate change. There is a climate cataclysm looming, and we are underprepared for what this could mean.
 
-                        Climate change is caused by human activities and threatens life on earth as we know it. With rising greenhouse gas emissions, climate change is occurring at rates much faster than anticipated. Its impacts can be devastating and include extreme and changing weather patterns and rising sea levels.
+                        Climate change is caused by human activities and threatens life on earth. With rising greenhouse gas emissions, climate change is occurring at rates much faster than anticipated. Its impacts can be devastating and include extreme and changing weather patterns and rising sea levels. We need to take action now.
                         
                     </p>
                     <a href="https://www.un.org/sustainabledevelopment/climate-action/" target="_blank" class="btn">Learn More</a>
@@ -418,7 +418,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="js/main.js"></script>
 
-    <!-- 树木交互脚本 -->
+    <!-- tree interaction script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const waterBottle = document.getElementById('waterBottle');
@@ -427,39 +427,39 @@
             let isDragging = false;
             let hasTransformed = false;
 
-            // 拖拽开始
+            // drag start
             waterBottle.addEventListener('dragstart', function(e) {
                 isDragging = true;
                 waterBottle.classList.add('dragging');
-                e.dataTransfer.setData('text/plain', ''); // 必须设置数据才能拖拽
+                e.dataTransfer.setData('text/plain', ''); 
             });
 
-            // 拖拽结束
+            // drag end
             waterBottle.addEventListener('dragend', function() {
                 isDragging = false;
                 waterBottle.classList.remove('dragging');
             });
 
-            // 拖拽经过树木
+            // drag over tree
             tree.addEventListener('dragover', function(e) {
-                e.preventDefault(); // 允许放置
+                e.preventDefault(); 
             });
 
-            // 放置水瓶
+            // drop water bottle
             tree.addEventListener('drop', function(e) {
                 e.preventDefault();
                 if (!hasTransformed) {
-                    // 改变树木图片
+                    // change tree image
                     tree.src = 'img/green-tree.png';
-                    tree.alt = '重获新生的树木';
+                    tree.alt = 'reborn tree';
                     
-                    // 隐藏水瓶
+                    // hide water bottle
                     waterBottle.style.opacity = '0';
                     
-                    // 显示成功消息
+                    // show success message
                     successMessage.classList.add('show');
                     
-                    // 3秒后隐藏消息
+                    // 3 seconds later hide the message
                     setTimeout(() => {
                         successMessage.classList.remove('show');
                     }, 3000);
@@ -475,7 +475,7 @@
             dropdown.classList.toggle('show');
         }
 
-        // 点击其他地方关闭下拉菜单
+            // click other areas to close the dropdown menu
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('designThinkingDropdown');
             const dropdownToggle = document.querySelector('.dropdown-toggle');
@@ -486,11 +486,11 @@
         });
     </script>
 
-    <!-- 音乐播放器（隐藏） -->
+    <!-- music player (hidden) -->
     <audio id="bg-music" src="audio/Break.mp3" loop style="display:none"></audio>
-    <!-- 波浪条 -->
+    <!-- wave bar -->
     <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
-    <!-- 返回顶部按钮 -->
+    <!-- back to top button -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
     <script>
@@ -502,14 +502,14 @@
                 } else {
                     $('.header').removeClass('scrolled');
                 }
-                // 返回顶部按钮显示/隐藏
+                // back to top button show/hide
                 if ($(this).scrollTop() > 0) {
                     $('.back-to-top').fadeIn('slow').addClass('show');
                 } else {
                     $('.back-to-top').fadeOut('slow').removeClass('show');
                 }
             });
-            // 平滑滚动到顶部
+            // smooth scroll to top
             $('.back-to-top').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');

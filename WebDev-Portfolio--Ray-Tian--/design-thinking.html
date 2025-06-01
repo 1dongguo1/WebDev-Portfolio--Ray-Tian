@@ -344,13 +344,25 @@
             width: 100%;
             height: 100%;
         }
+        .peek-behind-section img {
+            max-width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(30,144,255,0.13);
+            transition: transform 0.3s;
+        }
+        .peek-behind-section img:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
-    <!-- 添加音频元素 -->
+    <!-- add audio element -->
     <audio id="bg-music" style="display: none;" src="audio/Break.mp3" loop></audio>
     
-    <!-- 添加音频可视化器容器 -->
+    <!-- add audio visualizer container -->
     <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);">
         <canvas id="visualizer-canvas"></canvas>
     </div>
@@ -386,42 +398,76 @@
                 <div class="col-md-6">
                     <div class="process-step">
                         <div class="step-number">1</div>
-                        <h3>Empathize</h3>
-                        <p>Understanding user needs through research and interviews. For example, when developing this portfolio website, I first analyzed the expectations and needs of potential visitors, such as clear navigation and engaging visuals.</p>
+                        <h3>Building</h3>
+                        <p>First to determine a framework for the website, I need to think about the overall structure and layout of the website. And find out what color I am going to use.  </p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="process-step">
                         <div class="step-number">2</div>
                         <h3>Define</h3>
-                        <p>Based on user research, identifying core problems and design goals. I determined key features to showcase, such as project displays, skill introductions, and accessibility considerations.</p>
+                        <p>Based on user research, identifying core problems and design goals. I determined key features to showcase, and find out which projects I am going to show.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="process-step">
                         <div class="step-number">3</div>
                         <h3>Ideate</h3>
-                        <p>Brainstorming multiple solutions to enhance user experience. I explored various layouts, interaction patterns, and visual designs to create an intuitive and aesthetically pleasing website.</p>
+                        <p>Brainstorming multiple solutions to enhance user experience. I explored various layouts and visual designs to create a more user-friendly website.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="process-step">
                         <div class="step-number">4</div>
-                        <h3>Prototype</h3>
-                        <p>Creating interactive prototypes using tools like Figma to visualize ideas. Low-fidelity prototypes were developed to validate concepts quickly before coding the final website.</p>
+                        <h3>Adjusting</h3>
+                        <p>Ask my friends to give me some feedback and adjust the website based on their suggestions. Such as the color, the layout, the content, etc. </p>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="process-step">
                         <div class="step-number">5</div>
                         <h3>Test</h3>
-                        <p>Collecting user feedback through usability testing and iterating based on results. I ensured the website is accessible, responsive, and user-friendly across devices.</p>
+                        <p>Debugging my website using developer tools. Press F12 to open the developer tools and check the website. Add some small and interesting features such as the music bar and back to top button.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Design Thinking Section End -->
+
+ <!-- Peek Behind the Curtain Section -->
+ <section class="peek-behind-section" style="background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%); padding: 80px 0;">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color:#1e90ff; font-size: 2.2rem; font-weight: 700; letter-spacing: 1px;">Peek Behind the Curtain: Crafting My Website</h2>
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-5 mb-4 mb-md-0 text-center">
+                <img src="img/behind-the-curtain1.png" alt="Code Screenshot 1">
+                <p class="mt-3" style="color:#1e90ff; font-size:1.1rem; font-weight:600; letter-spacing:1.2px;">CSS Styling</p>
+            </div>
+            <div class="col-md-5 text-center">
+                <img src="img/behind-the-curtain2.png" alt="Code Screenshot 2">
+                <p class="mt-3" style="color:#1e90ff; font-size:1.1rem; font-weight:600; letter-spacing:1.2px;">JavaScript Interactivity</p>
+            </div>
+        </div>
+        <div class="peek-desc" style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; box-shadow: 0 6px 24px rgba(30, 144, 255, 0.15); padding: 40px 32px; max-width: 950px; margin: 0 auto 40px auto; transition: transform 0.3s ease;">
+            <h4 style="color: #1e90ff; font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; position: relative; padding-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Challenges Overcome</h4>
+            <ul style="color: #333; font-size: 1rem; line-height: 1.8; padding-left: 20px; margin-bottom: 30px;">
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">Mastering debugging with browser developer tools (F12) and leveraging Claude 3.7 to streamline issue resolution and enhance website performance.</li>
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">When adding a new webpage, I need to make sure the webage should include all the features of the previous webpage. Such as the music bar and back to top button. And also the navigation bar. </li>
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">When making the little game in Global Goals. It's very hard for a beginner to make it. I look at some videos to learn how to make it. </li>
+            </ul>
+            <h4 style="color: #1e90ff; font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; position: relative; padding-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Using Developer Tools</h4>
+            <p style="color: #444; font-size: 1rem; line-height: 1.7; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Know I find it is a very important tools. It can help me to debug the website and make it more perfect. At the first time I made the music bar, it can't work. I use the developer tools to find the problem and fix it. I find out it is becausee I need to open the website with live server. And I ask AI how to fix it. Finally I download an extension and fix it. </p>
+            <h4 style="color: #1e90ff; font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; position: relative; padding-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Lessons Learned</h4>
+            <ul style="color: #333; font-size: 1rem; line-height: 1.8; padding-left: 20px; margin-bottom: 30px;">
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">Building a modern, responsive portfolio website from the knowledge I learned in the course.</li>
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">Learning how to design the website.</li>
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">Learning how to use the developer tools to debug the website.</li>
+                <li style="position: relative; padding-left: 20px; margin-bottom: 15px;">Record myself using the website. When I look at the website few years later, I can know what I have done and what I have learned.</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
     <!-- Footer Start -->
     <footer class="footer">
@@ -451,51 +497,51 @@
                 } else {
                     $('.header').removeClass('scrolled');
                 }
-                // 返回顶部按钮显示/隐藏
+                // button to top
                 if ($(this).scrollTop() > 0) {
                     $('.back-to-top').fadeIn('slow').addClass('show');
                 } else {
                     $('.back-to-top').fadeOut('slow').removeClass('show');
                 }
             });
-            // 平滑滚动到顶部
+            // smooth scroll to top
             $('.back-to-top').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
                 return false;
             });
 
-            // 移动端导航切换
+            // mobile navigation switch
             $('#mobile-nav-toggle').on('click', function() {
                 $('.nav-menu').toggleClass('active');
             });
 
-            // 点击页面其他区域关闭移动端导航
+            // click other areas of the page to close the mobile navigation
             $(document).on('click', function(e) {
                 if (!$(e.target).closest('.nav-menu, #mobile-nav-toggle').length) {
                     $('.nav-menu').removeClass('active');
                 }
             });
 
-            // 音频播放控制
+            // audio playback control
             const audio = document.getElementById('bg-music');
             const visualizer = document.getElementById('audio-visualizer');
             const canvas = document.getElementById('visualizer-canvas');
             const ctx = canvas.getContext('2d');
             let isPlaying = false;
 
-            // 设置canvas尺寸
+            // set canvas size
             canvas.width = 200;
             canvas.height = 80;
 
-            // 检查本地存储中的播放状态
+            // check the playback status in the local storage
             const wasPlaying = localStorage.getItem('musicPlaying') === 'true';
             if (wasPlaying) {
                 audio.play();
                 isPlaying = true;
             }
 
-            // 音频可视化
+            // audio visualization
             function drawVisualizer() {
                 if (!isPlaying) {
                     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -504,20 +550,20 @@
                     return;
                 }
 
-                // 创建渐变背景
+                // create gradient background
                 const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
                 gradient.addColorStop(0, 'rgba(135, 206, 250, 0.2)');
                 gradient.addColorStop(1, 'rgba(0, 0, 0, 0.7)');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // 绘制波浪效果
+                // draw wave effect
                 const time = Date.now() * 0.001;
                 const amplitude = 20;
                 const frequency = 0.05;
                 const speed = 2;
 
-                // 绘制多条波浪线
+                // draw multiple wave lines
                 for (let i = 0; i < 3; i++) {
                     ctx.beginPath();
                     ctx.moveTo(0, canvas.height / 2);
@@ -537,10 +583,10 @@
                 requestAnimationFrame(drawVisualizer);
             }
 
-            // 开始绘制可视化效果
+            // start drawing visualization effect
             drawVisualizer();
 
-            // 可视化器点击事件
+            // visualizer click event
             visualizer.addEventListener('click', function() {
                 if (!isPlaying) {
                     audio.play();

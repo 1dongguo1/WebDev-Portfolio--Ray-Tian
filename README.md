@@ -27,7 +27,17 @@ Welcome to my Web Development Portfolio, this is for showcasing my skills and pr
   
 ✅ ♿ Accessibility Features 
 - Inclusive design principles  
-- Accessibility implementation showcase  
+- Accessibility implementation showcase
+  
+✅ 🎵 Music Hobby
+- Explain my hobby of music
+- Sharing my original song
+- Music arrangement and recording practice
+  
+✅ 🔐 AES Tool
+- Data encryption and decryption tool based on AES algorithm
+- User-friendly encryption interface
+- Supports different key lengths
   
 💻 Technical Implementation  
   

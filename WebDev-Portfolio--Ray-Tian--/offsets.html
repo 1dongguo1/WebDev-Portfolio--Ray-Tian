@@ -156,36 +156,6 @@
             font-size: 14px;
             line-height: 1.5;
         }
-        /* 代码高亮颜色 */
-        .keyword { color: #569cd6; }  /* 关键字 */
-        .string { color: #ce9178; }   /* 字符串 */
-        .comment { color: #6a9955; }  /* 注释 */
-        .number { color: #b5cea8; }   /* 数字 */
-        .type { color: #4ec9b0; }     /* 类型 */
-        .function { color: #dcdcaa; } /* 函数 */
-        .namespace { color: #4ec9b0; } /* 命名空间 */
-        .enum { color: #4ec9b0; }     /* 枚举 */
-        .macro { color: #c586c0; }    /* 宏 */
-        .operator { color: #d4d4d4; } /* 运算符 */
-        .punctuation { color: #d4d4d4; } /* 标点符号 */
-        .btn-details {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #1E90FF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        .btn-details:hover {
-            background: #187bcd;
-            color: #fff;
-            transform: translateY(-2px);
-        }
-        .btn-details i {
-            margin-right: 5px;
-        }
         .footer {
             background: #1E90FF;
             color: #fff;
@@ -241,7 +211,7 @@
                 margin: 0;
             }
         }
-        /* 深色模式适配 */
+        /* dark mode adaptation */
         @media (prefers-color-scheme: dark) {
             body {
                 background: #1e1e1e;
@@ -288,21 +258,13 @@
                 background: #1e1e1e;
                 color: #d4d4d4;
             }
-             .btn-details {
-                background: #1E90FF;
-                color: #fff;
-            }
-            .btn-details:hover {
-                background: #187bcd;
-                color: #fff;
-            }
              .footer {
                 background: #2d2d2d;
                 color: #e0e0e0;
             }
         }
 
-        /* 浅色模式适配 */
+        /* light mode adaptation */
         @media (prefers-color-scheme: light) {
             body {
                 background: #f5f5f5;
@@ -321,44 +283,6 @@
                 color: #1E90FF;
                 border-bottom-color: #1E90FF;
             }
-            .btn-details {
-                background: #1E90FF;
-                color: #fff;
-            }
-            .btn-details:hover {
-                background: #187bcd;
-                color: #fff;
-            }
-        }
-
-        /* 代码高亮颜色 - 深色模式 */
-        @media (prefers-color-scheme: dark) {
-            .keyword { color: #569cd6; }  /* 关键字 */
-            .string { color: #ce9178; }   /* 字符串 */
-            .comment { color: #6a9955; }  /* 注释 */
-            .number { color: #b5cea8; }   /* 数字 */
-            .type { color: #4ec9b0; }     /* 类型 */
-            .function { color: #dcdcaa; } /* 函数 */
-            .namespace { color: #4ec9b0; } /* 命名空间 */
-            .enum { color: #4ec9b0; }     /* 枚举 */
-            .macro { color: #c586c0; }    /* 宏 */
-            .operator { color: #d4d4d4; } /* 运算符 */
-            .punctuation { color: #d4d4d4; } /* 标点符号 */
-        }
-
-        /* 代码高亮颜色 - 浅色模式 */
-        @media (prefers-color-scheme: light) {
-            .keyword { color: #0000ff; }  /* 关键字 */
-            .string { color: #a31515; }   /* 字符串 */
-            .comment { color: #008000; }  /* 注释 */
-            .number { color: #098658; }   /* 数字 */
-            .type { color: #267f99; }     /* 类型 */
-            .function { color: #795e26; } /* 函数 */
-            .namespace { color: #267f99; } /* 命名空间 */
-            .enum { color: #267f99; }     /* 枚举 */
-            .macro { color: #af00db; }    /* 宏 */
-            .operator { color: #000000; } /* 运算符 */
-            .punctuation { color: #000000; } /* 标点符号 */
         }
     </style>
 </head>
@@ -477,14 +401,14 @@ namespace cs2_dumper {
                 } else {
                     $('.header').removeClass('scrolled');
                 }
-                // 返回顶部按钮显示/隐藏
+                // back to top button show/hide
                 if ($(this).scrollTop() > 0) {
                     $('.back-to-top').fadeIn('slow').addClass('show');
                 } else {
                     $('.back-to-top').fadeOut('slow').removeClass('show');
                 }
             });
-            // 平滑滚动到顶部
+            // smooth scroll to top
             $('.back-to-top').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
@@ -493,11 +417,11 @@ namespace cs2_dumper {
         });
     </script>
 
-    <!-- 音乐播放器（隐藏） -->
+    <!-- music player (hidden) -->
     <audio id="bg-music" src="audio/Break.mp3" loop style="display:none"></audio>
-    <!-- 波浪条 -->
+    <!-- wave bar -->
     <div id="audio-visualizer" style="position: fixed; bottom: 20px; right: 20px; width: 200px; height: 80px; background: rgba(0,0,0,0.7); border-radius: 10px; overflow: hidden; z-index: 1000; cursor: pointer; box-shadow: 0 0 20px rgba(0,0,0,0.3);"></div>
-    <!-- 返回顶部按钮 -->
+    <!-- back to top button -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 </body>
 </html> 
