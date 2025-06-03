@@ -1,0 +1,28 @@
+Reflection on My Web Development Portfolio Design
+
+This portfolio website demonstrates a sophisticated approach to modern web development, showing my learning about HTML through Term 4. I used the knowledge I learned from the VsCode course to create my own website. It includes many parts, such as projects, Design Thinking, Global Goals, and accessibility.
+
+Navigation and Header Design
+The navigation bar is not easy to design. Because of the length of itself. I need to condense my words so that all of them can be fully expressed. The navigation system adapts intelligently across different screen sizes, with the menu collapsing on mobile devices while maintaining accessibility. The hover effects and color transitions provide immediate visual feedback, enhancing user interaction.
+
+Responsive Design Implementation
+The website demonstrates comprehensive responsive design principles through carefully crafted media queries. [3](#0-2)  Each breakpoint thoughtfully adjusts font sizes, spacing, and layout elements to ensure optimal viewing across devices. The progressive enhancement approach ensures functionality remains intact regardless of screen size.
+
+Interactive Features and Engagement
+The Climate Action Project page showcases innovative interactive design through its drag-and-drop tree-watering game. This feature demonstrates advanced JavaScript implementation. The little game is interesting and can show my ability to use HTML. Also, the music display shows what modern HTML can do.
+
+Technical Architecture
+The codebase reveals a well-structured approach to web development, incorporating modern CSS techniques, JavaScript functionality, and multimedia integration. I also write comments for everyone to understand my code. The audio visualization system demonstrates advanced Web Audio API implementation, creating dynamic visual feedback. I think this part is amazing for me because when open a website, there are very cool music displays.
+
+Visual Design and Aesthetics
+The blue-dominant theme with strategic accent colors provides professional appeal while maintaining visual interest. The background transition can avoid the website to monotone. Create a better visual effect. I also make photos bigger when your mouse is hovered on it. Which is more vivid.
+
+Specialized Content Integration
+The portfolio effectively showcases diverse technical skills through specialized pages like the CS2 cheat analysis section, demonstrating both web development capabilities and systems programming knowledge. It can show my skill in using code to do interesting things.
+
+Overall, this process is not easy. And it includes a lot of debugging. When facing problems, I always search on the internet for solutions or ask my friends for help. It takes me a lot of time. But I think it is useful. Maybe after a few years, I go back and see HTML, it is the start of learning to code and do my projects.
+
+Wiki pages you might want to explore to explain my code:
+- https://deepwiki.com/1dongguo1/WebDev-Portfolio--Ray-Tian/1-overview
+- https://deepwiki.com/1dongguo1/WebDev-Portfolio--Ray-Tian/2.4-climate-action-project
+- https://deepwiki.com/1dongguo1/WebDev-Portfolio--Ray-Tian/3-cs2-game-analysis
