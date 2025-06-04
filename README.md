@@ -39,8 +39,6 @@ Welcome to my Web Development Portfolio, this is for showcasing my skills and pr
 - User-friendly encryption interface
 - Supports different key lengths
   
-💻 Technical Implementation  
-  
 🔍 CS2 Analysis Components 
 - `client_dll.hpp`: Game structure definitions  
 - `offsets.hpp`: Memory address mapping  
