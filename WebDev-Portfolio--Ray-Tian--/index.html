@@ -423,6 +423,19 @@
                 $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
                 return false;
             });
+
+            // Easter egg: click profile image 3 times to open little-game.html
+            let profileClickCount = 0;
+            const profileImg = document.querySelector('.profile-img');
+            if (profileImg) {
+                profileImg.addEventListener('click', function() {
+                    profileClickCount++;
+                    if (profileClickCount === 3) {
+                        window.open('little-game.html', '_blank');
+                        profileClickCount = 0;
+                    }
+                });
+            }
         });
     </script>
 </body>
